@@ -160,19 +160,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/quantum_ic_play_arrow_grey600_48"
-            android:id="@+id/imageButton2"
-            android:layout_weight="1"/>
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_close_light"
-            android:id="@+id/imageButton"
-            android:layout_weight="1"/>
     </LinearLayout>
 
 </LinearLayout>
