@@ -8,6 +8,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.PopupWindowCompat;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toolbar;
 import android.util.Log;
 
 /**
@@ -43,10 +49,16 @@ public class SlideActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slide);
 
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setActionBar(myToolbar);
+
+        getMenuInflater().inflate(R.menu.toolbar, myToolbar.getMenu());
+
         // Instantiate a ViewPager and a PagerAdapter.
         mPager = (ViewPager) findViewById(R.id.pager);
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
+
         mainActivity = this;
         new Thread(new Runnable() {
             @Override
@@ -108,5 +120,23 @@ public class SlideActivity extends FragmentActivity {
         public int getCount() {
             return NUM_PAGES;
         }
+    }
+
+
+    /**
+     * Handle creation of options menu.
+     * @param menu the option menu handle.
+     * @return state of parent handling
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        final MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.toolbar, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public boolean onNotificationClick(MenuItem item) {
+        return true;
     }
 }

@@ -18,6 +18,7 @@ public class SlidePageFragement extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.slide_page, container, false);
 
+
         return rootView;
     }
 }
