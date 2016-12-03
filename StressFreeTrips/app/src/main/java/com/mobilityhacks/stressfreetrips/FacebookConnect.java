@@ -19,8 +19,6 @@ import java.net.URISyntaxException;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.net.ssl.HttpsURLConnection;
-
 /**
  * Created by Owner on 03.12.2016.
  */
@@ -34,7 +32,7 @@ public class FacebookConnect {
         BasicResponseHandler handler = new BasicResponseHandler();
 
         String sResponse = handler.handleResponse(serverResponse);
-        List<LatLng> route = new LinkedList<LatLng>();
+        List<LatLng> route = new LinkedList<>();
         try {
             JSONObject parser = new JSONObject(sResponse);
             JSONArray events  = parser.getJSONArray("data");
