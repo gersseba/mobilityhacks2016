@@ -65,7 +65,7 @@ public class SlideActivity extends FragmentActivity {
             public void run() {
                 BvgConnect bvgConnect = new BvgConnect();
                 try {
-                    bvgConnect.getTrip();
+                    bvgConnect.getTrip(bvgConnect.WESTKREUZ,bvgConnect.OSTKREUZ);
                 } catch (Exception e){
                     Log.e("bvg",e.toString());
                 }

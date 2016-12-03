@@ -28,14 +28,26 @@ public class BvgConnect {
 
     private HttpClient oClient;
 
+    public static final String WESTKREUZ = "009360146";
+    public static final String OSTKREUZ = "009120003";
+    public static final String SUEDKREUZ = "009058101";
 
-    public LatLng[] getTrip() throws IOException, URISyntaxException {
+    public LatLng[] getTrip(String from, String to) throws IOException, URISyntaxException {
+        String url = String.format("http://demo.hafas.de/openapi/vbb-proxy/trip?originId=%s&passlist=1&destId=%s&format=json&accessId=BVG-VBB-Dezember&date=2016-12-12",from,to);
+        return queryBvg(url);
+    }
 
+    public LatLng[] getAlternativeTrip(String from, String to, String via) throws IOException, URISyntaxException {
+
+        String url = String.format("http://demo.hafas.de/openapi/vbb-proxy/trip?originId=%s&viaId=%s&passlist=1&destId=%s&format=json&accessId=BVG-VBB-Dezember&date=2016-12-12",from,via, to);
+        return queryBvg(url);
+    }
+
+    private LatLng[] queryBvg(String url) throws IOException, URISyntaxException {
         oClient = new DefaultHttpClient();
-        HttpGet httpGet = new HttpGet(new URI("http://demo.hafas.de/openapi/vbb-proxy/trip?originId=009110003&passlist=1&destId=009100042&format=json&accessId=BVG-VBB-Dezember&date=2016-12-12"));
+        HttpGet httpGet = new HttpGet(new URI(url));
         HttpResponse serverResponse = oClient.execute(httpGet);
         BasicResponseHandler handler = new BasicResponseHandler();
-
         String sResponse = handler.handleResponse(serverResponse);
         List<LatLng> route = new LinkedList<LatLng>();
         try {
@@ -60,22 +72,6 @@ public class BvgConnect {
                     Log.e("BvgConnect", String.valueOf(lon));
                     route.add(new LatLng(lat,lon));
                 }
-                // JSONObject origin = leg.getJSONObject("Origin");
-                // String originName = origin.getString("name");
-                // double originLong = origin.getDouble("lon");
-                // double originLat = origin.getDouble("lat");
-                // Log.e("BvgConnect", originName);
-                // Log.e("BvgConnect",String.valueOf(originLat));
-                // Log.e("BvgConnect", String.valueOf(originLong));
-                // route.add(new LatLng(originLat,originLong));
-                // JSONObject destination = leg.getJSONObject("Destination");
-                // String destinationName = destination.getString("name");
-                // double destinationLong = destination.getDouble("lon");
-                // double destinationLat = destination.getDouble("lat");
-                // Log.e("BvgConnect", destinationName);
-                // Log.e("BvgConnect",String.valueOf(destinationLat));
-                // Log.e("BvgConnect", String.valueOf(destinationLong));
-                // route.add(new LatLng(destinationLat,destinationLong));
             }
         } catch (JSONException e) {
             Log.e("BvgConnect",e.toString());
