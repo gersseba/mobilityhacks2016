@@ -51,13 +51,31 @@ public class MapsFragment extends Fragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                BvgConnect bvgConnect = new BvgConnect();
                 try {
-                    final LatLng[] stops = bvgConnect.getTrip();
+                    final LatLng[] stops = BvgConnect.getTrip();
                     SlideActivity.mainActivity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             drawPrimaryLinePath(stops, Color.GREEN);
+                        }
+                    });
+                } catch (Exception e){
+                    Log.e("bvg",e.toString());
+                }
+            }
+        }).start();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    final LatLng[] stops = FacebookConnect.getEvents();
+                    SlideActivity.mainActivity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            for(int i = 0; i < stops.length; i ++) {
+                                addCircle(stops[i].latitude, stops[i].longitude, 200, Color.RED);
+                            }
                         }
                     });
                 } catch (Exception e){

@@ -19,18 +19,18 @@ import java.net.URISyntaxException;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.net.ssl.HttpsURLConnection;
+
 /**
  * Created by Owner on 03.12.2016.
  */
 
 public class FacebookConnect {
 
-    private HttpClient oClient;
-
-    public LatLng[] getEvents() throws IOException, URISyntaxException {
-        oClient = new DefaultHttpClient();
-        HttpGet httpGet = new HttpGet(new URI("https://graph.facebook.com/v2.8/search?access_token=EAACVsj4GyKgBAH5KQql48WAtoKrldvFPicIhi1aq9ZBInvk13SRd4aljzZCZAqwR4m5bZB9i9lOf8ZBRHsxvB4FFZBydw9arr5C74w1DBQdC1ZCXpHrjXJqCU3hg5vLuYzMgiINZBbs8t3ycntHRryutSsWaO1ZCTqrG7Po2k6akRSQZDZD&debug=all&format=json&method=get&pretty=0&q=lancaster&suppress_http_code=1&type=event&since=2016-12-10&limit=1"));
-        HttpResponse serverResponse = oClient.execute(httpGet);
+    public static LatLng[] getEvents() throws IOException, URISyntaxException {
+        HttpClient client = new DefaultHttpClient();
+        HttpGet httpGet = new HttpGet(new URI("https://graph.facebook.com/v2.8/search?access_token=EAACVsj4GyKgBAH5KQql48WAtoKrldvFPicIhi1aq9ZBInvk13SRd4aljzZCZAqwR4m5bZB9i9lOf8ZBRHsxvB4FFZBydw9arr5C74w1DBQdC1ZCXpHrjXJqCU3hg5vLuYzMgiINZBbs8t3ycntHRryutSsWaO1ZCTqrG7Po2k6akRSQZDZD&debug=all&format=json&method=get&pretty=0&q=hertha&suppress_http_code=1&type=event&since=2016-12-10&limit=1"));
+        HttpResponse serverResponse = client.execute(httpGet);
         BasicResponseHandler handler = new BasicResponseHandler();
 
         String sResponse = handler.handleResponse(serverResponse);

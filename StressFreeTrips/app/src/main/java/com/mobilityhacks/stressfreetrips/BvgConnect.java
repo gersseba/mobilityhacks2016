@@ -26,12 +26,11 @@ import java.util.List;
 
 public class BvgConnect {
 
-    private HttpClient oClient;
 
-    public LatLng[] getTrip() throws IOException, URISyntaxException {
-        oClient = new DefaultHttpClient();
+    public static LatLng[] getTrip() throws IOException, URISyntaxException {
+        HttpClient client = new DefaultHttpClient();
         HttpGet httpGet = new HttpGet(new URI("http://demo.hafas.de/openapi/vbb-proxy/trip?originId=009110003&destId=009100042&format=json&accessId=BVG-VBB-Dezember&date=2016-12-12"));
-        HttpResponse serverResponse = oClient.execute(httpGet);
+        HttpResponse serverResponse = client.execute(httpGet);
         BasicResponseHandler handler = new BasicResponseHandler();
 
         String sResponse = handler.handleResponse(serverResponse);
