@@ -1,6 +1,7 @@
 package com.mobilityhacks.stressfreetrips;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -14,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Toolbar;
@@ -138,6 +140,36 @@ public class SlideActivity extends FragmentActivity {
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
         popupWindow.showAsDropDown(mToolbar);
+        Button cancel = (Button) popupView.findViewById(R.id.cancel);
+        Button accept = (Button) popupView.findViewById(R.id.accept);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
+        accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            final LatLng[] stops = BvgConnect.getTrip(BvgConnect.WESTKREUZ,BvgConnect.SUEDKREUZ,BvgConnect.OSTKREUZ);
+                            SlideActivity.mainActivity.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    SlideActivity.mMapFragment.drawPrimaryLinePath(stops, Color.GREEN);
+                                    popupWindow.dismiss();
+                                }
+                            });
+                        } catch (Exception e){
+                            Log.e("bvg",e.toString());
+                        }
+                    }
+                }).start();
+            }
+        });
         return true;
     }
 }
