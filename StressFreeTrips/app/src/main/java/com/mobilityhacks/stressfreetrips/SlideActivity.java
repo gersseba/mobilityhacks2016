@@ -11,8 +11,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.PopupWindowCompat;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toolbar;
+import android.util.Log;
 
 /**
  * Created by Owner on 03.12.2016.
@@ -58,6 +60,18 @@ public class SlideActivity extends FragmentActivity {
         mPager.setAdapter(mPagerAdapter);
 
         mainActivity = this;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                BvgConnect bvgConnect = new BvgConnect();
+                try {
+                    bvgConnect.getTrip();
+                } catch (Exception e){
+                    Log.e("bvg",e.toString());
+                }
+            }
+        }).start();
+
     }
 
     @Override
@@ -122,7 +136,7 @@ public class SlideActivity extends FragmentActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    public void onNotificationClick(View view) {
-        PopupWindowCompat
+    public boolean onNotificationClick(MenuItem item) {
+        return true;
     }
 }

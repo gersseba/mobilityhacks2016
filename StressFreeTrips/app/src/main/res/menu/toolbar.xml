@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="Account"
-        android:id="@+id/action_favorite"
+    <item android:title="Notification"
+        android:id="@+id/action_notification"
         android:icon="@drawable/ic_action_no_notification"
-        android:onClick="onNotificationClick"
+          android:onClick="onNotificationClick"
         android:showAsAction="always"/>
 </menu>
