@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 
 /**
  * Created by Owner on 03.12.2016.
@@ -47,6 +48,18 @@ public class SlideActivity extends FragmentActivity {
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
         mainActivity = this;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                BvgConnect bvgConnect = new BvgConnect();
+                try {
+                    bvgConnect.getTrip();
+                } catch (Exception e){
+                    Log.e("bvg",e.toString());
+                }
+            }
+        }).start();
+
     }
 
     @Override
