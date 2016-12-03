@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,7 +61,22 @@ public class MapsFragment extends Fragment {
                 CameraPosition cameraPosition = new CameraPosition.Builder().target(berlin).zoom(12).build();
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                 addCircle(52.521918, 13.413215, 200, Color.RED); // alexanderplatz
-                drawPrimaryLinePath(new LatLng[]{WOANDERS, ALEX, NOCHWOANDERS}, Color.BLUE);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            final LatLng[] stops = BvgConnect.getTrip(BvgConnect.WESTKREUZ,BvgConnect.ALEXANDERPLATZ,BvgConnect.OSTKREUZ);
+                            SlideActivity.mainActivity.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    drawPrimaryLinePath(stops, Color.GREEN);
+                                }
+                            });
+                        } catch (Exception e){
+                            Log.e("bvg",e.toString());
+                        }
+                    }
+                }).start();
             }
         });
 
