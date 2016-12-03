@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">StressFreeTrips</string>
     <string name="title_activity_maps">Map</string>
+    <string name="facebook_app_access_token">1361064113946047|-P8cq99yo9KSYvxHjw8d0gG2QhQ</string>
+    <string name="facebook_app_id">1361064113946047</string>
+    <string name="facebook_user_id">885049648204666</string>
 </resources>

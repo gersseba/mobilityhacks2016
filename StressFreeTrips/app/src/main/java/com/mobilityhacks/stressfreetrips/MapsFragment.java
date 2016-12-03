@@ -43,6 +43,8 @@ public class MapsFragment extends Fragment {
 
         mMapView.onResume(); // needed to get the map to display immediately
 
+        new FacebookConnect();
+
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
         } catch (Exception e) {
