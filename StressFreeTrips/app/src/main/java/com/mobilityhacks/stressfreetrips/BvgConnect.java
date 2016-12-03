@@ -26,18 +26,15 @@ import java.util.List;
 
 public class BvgConnect {
 
-    private HttpClient oClient;
+    public static LatLng[] getTrip() throws IOException, URISyntaxException {
 
-
-    public LatLng[] getTrip() throws IOException, URISyntaxException {
-
-        oClient = new DefaultHttpClient();
+        HttpClient client = new DefaultHttpClient();
         HttpGet httpGet = new HttpGet(new URI("http://demo.hafas.de/openapi/vbb-proxy/trip?originId=009110003&passlist=1&destId=009100042&format=json&accessId=BVG-VBB-Dezember&date=2016-12-12"));
-        HttpResponse serverResponse = oClient.execute(httpGet);
+        HttpResponse serverResponse = client.execute(httpGet);
         BasicResponseHandler handler = new BasicResponseHandler();
 
         String sResponse = handler.handleResponse(serverResponse);
-        List<LatLng> route = new LinkedList<LatLng>();
+        List<LatLng> route = new LinkedList<>();
         try {
             JSONObject parser = new JSONObject(sResponse);
             JSONArray trip  = parser.getJSONArray("Trip");
@@ -60,22 +57,6 @@ public class BvgConnect {
                     Log.e("BvgConnect", String.valueOf(lon));
                     route.add(new LatLng(lat,lon));
                 }
-                // JSONObject origin = leg.getJSONObject("Origin");
-                // String originName = origin.getString("name");
-                // double originLong = origin.getDouble("lon");
-                // double originLat = origin.getDouble("lat");
-                // Log.e("BvgConnect", originName);
-                // Log.e("BvgConnect",String.valueOf(originLat));
-                // Log.e("BvgConnect", String.valueOf(originLong));
-                // route.add(new LatLng(originLat,originLong));
-                // JSONObject destination = leg.getJSONObject("Destination");
-                // String destinationName = destination.getString("name");
-                // double destinationLong = destination.getDouble("lon");
-                // double destinationLat = destination.getDouble("lat");
-                // Log.e("BvgConnect", destinationName);
-                // Log.e("BvgConnect",String.valueOf(destinationLat));
-                // Log.e("BvgConnect", String.valueOf(destinationLong));
-                // route.add(new LatLng(destinationLat,destinationLong));
             }
         } catch (JSONException e) {
             Log.e("BvgConnect",e.toString());

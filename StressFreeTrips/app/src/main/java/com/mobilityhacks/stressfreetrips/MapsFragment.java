@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,41 @@ public class MapsFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    final LatLng[] stops = BvgConnect.getTrip();
+                    SlideActivity.mainActivity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            drawPrimaryLinePath(stops, Color.GREEN);
+                        }
+                    });
+                } catch (Exception e){
+                    Log.e("bvg",e.toString());
+                }
+            }
+        }).start();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    final LatLng[] stops = FacebookConnect.getEvents();
+                    SlideActivity.mainActivity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            for(int i = 0; i < stops.length; i ++) {
+                                addCircle(stops[i].latitude, stops[i].longitude, 200, Color.RED);
+                            }
+                        }
+                    });
+                } catch (Exception e){
+                    Log.e("bvg",e.toString());
+                }
+            }
+        }).start();
 
         mMapView.getMapAsync(new OnMapReadyCallback() {
             @Override

@@ -8,13 +8,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.PopupWindowCompat;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toolbar;
-import android.util.Log;
+
+import com.google.android.gms.maps.model.LatLng;
 
 /**
  * Created by Owner on 03.12.2016.
@@ -60,17 +60,7 @@ public class SlideActivity extends FragmentActivity {
         mPager.setAdapter(mPagerAdapter);
 
         mainActivity = this;
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                BvgConnect bvgConnect = new BvgConnect();
-                try {
-                    bvgConnect.getTrip();
-                } catch (Exception e){
-                    Log.e("bvg",e.toString());
-                }
-            }
-        }).start();
+
 
     }
 
