@@ -28,14 +28,15 @@ public class BvgConnect {
 
     private HttpClient oClient;
 
+
     public LatLng[] getTrip() throws IOException, URISyntaxException {
+
         oClient = new DefaultHttpClient();
-        HttpGet httpGet = new HttpGet(new URI("http://demo.hafas.de/openapi/vbb-proxy/trip?originId=009110003&destId=009100042&format=json&accessId=BVG-VBB-Dezember&date=2016-12-12"));
+        HttpGet httpGet = new HttpGet(new URI("http://demo.hafas.de/openapi/vbb-proxy/trip?originId=009110003&passlist=1&destId=009100042&format=json&accessId=BVG-VBB-Dezember&date=2016-12-12"));
         HttpResponse serverResponse = oClient.execute(httpGet);
         BasicResponseHandler handler = new BasicResponseHandler();
 
         String sResponse = handler.handleResponse(serverResponse);
-        Log.e("BvgConnect",sResponse);
         List<LatLng> route = new LinkedList<LatLng>();
         try {
             JSONObject parser = new JSONObject(sResponse);
@@ -47,22 +48,34 @@ public class BvgConnect {
 
             for(int i = 0; i < legs.length(); i++){
                 leg = legs.getJSONObject(i);
-                JSONObject origin = leg.getJSONObject("Origin");
-                String originName = origin.getString("name");
-                double originLong = origin.getDouble("lon");
-                double originLat = origin.getDouble("lat");
-                Log.e("BvgConnect", originName);
-                Log.e("BvgConnect",String.valueOf(originLat));
-                Log.e("BvgConnect", String.valueOf(originLong));
-                route.add(new LatLng(originLat,originLong));
-                JSONObject destination = leg.getJSONObject("Destination");
-                String destinationName = destination.getString("name");
-                double destinationLong = destination.getDouble("lon");
-                double destinationLat = destination.getDouble("lat");
-                Log.e("BvgConnect", destinationName);
-                Log.e("BvgConnect",String.valueOf(destinationLat));
-                Log.e("BvgConnect", String.valueOf(destinationLong));
-                route.add(new LatLng(destinationLat,destinationLong));
+                JSONObject stops = leg.getJSONObject("Stops");
+                JSONArray halt = stops.getJSONArray("Stop");
+                for(int j = 0; j < halt.length(); j++) {
+                    JSONObject stop = halt.getJSONObject(j);
+                    double lon = stop.getDouble("lon");
+                    double lat = stop.getDouble("lat");
+                    String name = stop.getString("name");
+                    Log.e("BvgConnect", name);
+                    Log.e("BvgConnect",String.valueOf(lat));
+                    Log.e("BvgConnect", String.valueOf(lon));
+                    route.add(new LatLng(lat,lon));
+                }
+                // JSONObject origin = leg.getJSONObject("Origin");
+                // String originName = origin.getString("name");
+                // double originLong = origin.getDouble("lon");
+                // double originLat = origin.getDouble("lat");
+                // Log.e("BvgConnect", originName);
+                // Log.e("BvgConnect",String.valueOf(originLat));
+                // Log.e("BvgConnect", String.valueOf(originLong));
+                // route.add(new LatLng(originLat,originLong));
+                // JSONObject destination = leg.getJSONObject("Destination");
+                // String destinationName = destination.getString("name");
+                // double destinationLong = destination.getDouble("lon");
+                // double destinationLat = destination.getDouble("lat");
+                // Log.e("BvgConnect", destinationName);
+                // Log.e("BvgConnect",String.valueOf(destinationLat));
+                // Log.e("BvgConnect", String.valueOf(destinationLong));
+                // route.add(new LatLng(destinationLat,destinationLong));
             }
         } catch (JSONException e) {
             Log.e("BvgConnect",e.toString());
@@ -70,4 +83,5 @@ public class BvgConnect {
         LatLng[] aRoute = route.toArray(new LatLng[route.size()]);
         return aRoute;
     }
+
 }
