@@ -22,22 +22,25 @@
         android:layout_weight="0.18">
 
         <EditText
-            android:text="Start"
-            android:layout_width="match_parent"
+            android:text="Departure stop"
+            android:layout_width="340dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:id="@+id/start_text"
             android:elegantTextHeight="false"/>
 
         <Button
             android:text="Intermediate Stops"
-            android:layout_width="match_parent"
+            android:layout_width="340dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:id="@+id/button2"/>
 
         <EditText
-            android:text="End"
-            android:layout_width="match_parent"
+            android:text="Arrival stop"
+            android:layout_width="340dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:id="@+id/end_text"/>
 
         <LinearLayout
