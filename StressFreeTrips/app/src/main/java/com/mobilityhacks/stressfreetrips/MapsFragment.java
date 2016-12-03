@@ -1,8 +1,8 @@
 package com.mobilityhacks.stressfreetrips;
 
-import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.location.Location;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,13 +10,13 @@ import android.view.ViewGroup;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 /**
  * Created by Owner on 03.12.2016.
@@ -26,6 +26,12 @@ public class MapsFragment extends Fragment {
 
     MapView mMapView;
     private GoogleMap googleMap;
+
+    private final static LatLng ALEX = new LatLng(52.521918, 13.413215);
+    private final static LatLng WOANDERS = new LatLng(52.5, 13.4);
+    private final static LatLng NOCHWOANDERS = new LatLng(52.6, 13.43);
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,26 +53,49 @@ public class MapsFragment extends Fragment {
             public void onMapReady(GoogleMap mMap) {
                 googleMap = mMap;
 
-                // For showing a move to my location button
-                if (ActivityCompat.checkSelfPermission(SlideActivity.mainActivity,
-                        android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(SlideActivity.mainActivity,
-                        android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    return;
-                }
-                googleMap.setMyLocationEnabled(true);
 
-                // For dropping a marker at a point on the Map
-                LatLng sydney = new LatLng(-34, 151);
-                googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker Title").snippet("Marker Description"));
+                LatLng berlin = new LatLng(52.52, 13.41);
 
                 // For zooming automatically to the location of the marker
-                CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
+                CameraPosition cameraPosition = new CameraPosition.Builder().target(berlin).zoom(12).build();
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                addCircle(52.521918, 13.413215, 200, Color.RED); // alexanderplatz
+                drawPrimaryLinePath(new LatLng[]{WOANDERS, ALEX, NOCHWOANDERS}, Color.BLUE);
             }
         });
 
         return rootView;
     }
+
+    private void addCircle(double lat, double lng, int radius, int color) {
+        color |= 0xFF000000;
+        color &= 0x88FFFFFF;
+        googleMap.addCircle(new CircleOptions().center(new LatLng(lat, lng))
+                .radius(radius)
+                .strokeColor(Color.TRANSPARENT)
+                .fillColor(color));
+    }
+
+    private void drawPrimaryLinePath( LatLng[] locsToDraw, int color )    {
+        if ( locsToDraw.length < 2 ) {
+            return;
+        }
+
+        PolylineOptions options = new PolylineOptions();
+
+        options.color( color );
+        options.width( 5 );
+        options.visible( true );
+
+        for ( LatLng latLng : locsToDraw )
+        {
+            options.add( latLng );
+        }
+
+        googleMap.addPolyline( options );
+
+    }
+
 
     @Override
     public void onResume() {

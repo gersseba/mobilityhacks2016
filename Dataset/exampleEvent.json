@@ -1,0 +1,533 @@
+{
+  "data": [
+    {
+      "end_time": "2016-12-10T20:30:00+0100",
+      "name": "Hertha BSC - Werder Bremen",
+      "place": {
+        "name": "Ostkurve Olympiastadion",
+        "location": {
+          "city": "Berlin",
+          "country": "Germany",
+          "latitude": 52.514680982536,
+          "longitude": 13.241075889819,
+          "street": "Olympischer Platz 3",
+          "zip": "14053"
+        },
+        "id": "252661461436260"
+      },
+      "start_time": "2016-12-10T18:30:00+0100",
+      "id": "294715314231850"
+    },
+    {
+      "end_time": "2016-12-03T17:20:00+0100",
+      "name": "VFL Wolfsburg - Hertha BSC",
+      "place": {
+        "name": "VW Arena Gästeblock",
+        "location": {
+          "city": "Wolfsburg",
+          "country": "Germany",
+          "latitude": 52.432173006216,
+          "located_in": "245986282101258",
+          "longitude": 10.804145598824,
+          "zip": "38440"
+        },
+        "id": "126601134076423"
+      },
+      "start_time": "2016-12-03T15:30:00+0100",
+      "id": "681203665363654"
+    },
+    {
+      "description": "Hier das Heimspiel als Merker für den eigenen Terminkalender. 
+
+Wer Lust auf etwas Plausch und neue Kontakte in der Hertha-Familie hat, kann gerne zu unserem Treffpunkt vor dem Spiel kommen (Parkplatz P4 am Olympiastadion). Freunde und Mitglieder von Fans@Hertha e.V. sind immer willkommen. 
+
+Erfahrungsgemäß sind ab 17:00 Uhr die ersten Leute vor Ort. 
+
+Wer ist noch dabei?
+
+fans@hertha e.V. im Internet unter http://www.fans-at-hertha.de/",
+      "end_time": "2016-12-10T20:30:00+0100",
+      "name": "Hertha BSC - Werder Bremen",
+      "place": {
+        "name": "Berliner Olympiastadion",
+        "location": {
+          "city": "Berlin",
+          "country": "Germany",
+          "latitude": 52.514147212002,
+          "longitude": 13.241307762599,
+          "street": "Olympischer Platz 3",
+          "zip": "14053"
+        },
+        "id": "269726416428403"
+      },
+      "start_time": "2016-12-10T18:30:00+0100",
+      "id": "104269763386412"
+    },
+    {
+      "description": "14. Spieltag der Saison 2016/2017
+10. Dezember 2016
+Anstoss: 18:30 Uhr",
+      "end_time": "2016-12-10T20:30:00+0100",
+      "name": "Hertha BSC vs. SV Werder Bremen",
+      "place": {
+        "name": "Olympiastadion Berlin",
+        "location": {
+          "city": "Berlin",
+          "country": "Germany",
+          "latitude": 52.51452,
+          "longitude": 13.24328,
+          "street": "Olympischer Platz 3",
+          "zip": "14053"
+        },
+        "id": "411299868987036"
+      },
+      "start_time": "2016-12-10T18:30:00+0100",
+      "id": "515431975332633"
+    },
+    {
+      "description": "Dieses Spiel wird noch von der DFL Terminiert !",
+      "end_time": "2017-05-06T17:30:00+0200",
+      "name": "Hertha BSC - Leipzig",
+      "place": {
+        "name": "Ostkurve Olympiastadion",
+        "location": {
+          "city": "Berlin",
+          "country": "Germany",
+          "latitude": 52.514680982536,
+          "longitude": 13.241075889819,
+          "street": "Olympischer Platz 3",
+          "zip": "14053"
+        },
+        "id": "252661461436260"
+      },
+      "start_time": "2017-05-06T15:30:00+0200",
+      "id": "1155353437875270"
+    },
+    {
+      "description": "Hier das Auswärtsspiel als Merker und Planungshilfe für den eigenen Terminkalender. 
+
+Wer ist noch dabei?
+
+fans@hertha e.V. im Internet unter http://www.fans-at-hertha.de/",
+      "end_time": "2016-12-03T17:30:00+0100",
+      "name": "VfL Wolfsburg - Hertha BSC",
+      "place": {
+        "name": "Volkswagen Arena",
+        "location": {
+          "city": "Wolfsburg",
+          "country": "Germany",
+          "latitude": 52.431944,
+          "longitude": 10.803889,
+          "street": "In den Allerwiesen 1",
+          "zip": "38446"
+        },
+        "id": "137384756307882"
+      },
+      "start_time": "2016-12-03T15:30:00+0100",
+      "id": "669059733273073"
+    },
+    {
+      "description": "Dieses Spiel wird noch von der DFL Terminiert !",
+      "end_time": "2017-02-25T17:30:00+0100",
+      "name": "Hertha BSC - Eintracht Frankfurt",
+      "place": {
+        "name": "Ostkurve Olympiastadion",
+        "location": {
+          "city": "Berlin",
+          "country": "Germany",
+          "latitude": 52.514680982536,
+          "longitude": 13.241075889819,
+          "street": "Olympischer Platz 3",
+          "zip": "14053"
+        },
+        "id": "252661461436260"
+      },
+      "start_time": "2017-02-25T15:30:00+0100",
+      "id": "168022463602684"
+    },
+    {
+      "description": "Hallo Hertha — Fans!
+
+Kommt und unterstützt unsere Amas um den Heimsieg sicher zu machen.
+
+Eintritt: 8,00 €, ermäßigt 5,00 €
+
+Dauerkarteninhaber sowie Mitglieder des Team U18 und des Kids-Clubs müssen sich an der Tageskasse ein Ticket abholen und erhalten nur mit dem Ticket und der entsprechenden Mitglieds- bzw. Dauerkarte Zutritt zum Stadion. Zudem gilt dies nur, so lange Karten verfügbar sind.",
+      "end_time": "2016-12-11T15:30:00+0100",
+      "name": "Hertha BSC II - 1. FC Lokomotive Leipzig",
+      "place": {
+        "name": "Friedrich-Ludwig-Jahn-Sportpark",
+        "location": {
+          "city": "Berlin",
+          "country": "Germany",
+          "latitude": 52.543055555556,
+          "longitude": 13.405277777778,
+          "street": "Cantianstraße 24",
+          "zip": "10437"
+        },
+        "id": "117332214990557"
+      },
+      "start_time": "2016-12-11T13:30:00+0100",
+      "id": "1945127532380910"
+    },
+    {
+      "description": "Hier das Heimspiel als Merker für den eigenen Terminkalender. 
+
+Wer Lust auf etwas Plausch und neue Kontakte in der Hertha-Familie hat, kann gerne zu unserem Treffpunkt vor dem Spiel kommen (Parkplatz P4 am Olympiastadion). Freunde und Mitglieder von Fans@Hertha e.V. sind immer willkommen. 
+
+Erfahrungsgemäß sind ab 14:00 Uhr die ersten Leute vor Ort. 
+
+Wer ist noch dabei?
+
+fans@hertha e.V. im Internet unter http://www.fans-at-hertha.de/
+http://www.betterplace.org/p49107",
+      "end_time": "2017-02-04T17:30:00+0100",
+      "name": "Hertha BSC - Ingolstadt",
+      "place": {
+        "name": "Berliner Olympiastadion",
+        "location": {
+          "city": "Berlin",
+          "country": "Germany",
+          "latitude": 52.514147212002,
+          "longitude": 13.241307762599,
+          "street": "Olympischer Platz 3",
+          "zip": "14053"
+        },
+        "id": "269726416428403"
+      },
+      "start_time": "2017-02-04T15:30:00+0100",
+      "id": "1081809158603257"
+    },
+    {
+      "description": "16. Spieltag der Saison 2016/2017
+21. Dezember 2016
+Anstoss: 20 Uhr",
+      "end_time": "2016-12-21T22:00:00+0100",
+      "name": "Hertha BSC vs. SV Darmstadt 98",
+      "place": {
+        "name": "Olympiastadion Berlin",
+        "location": {
+          "city": "Berlin",
+          "country": "Germany",
+          "latitude": 52.51452,
+          "longitude": 13.24328,
+          "street": "Olympischer Platz 3",
+          "zip": "14053"
+        },
+        "id": "411299868987036"
+      },
+      "start_time": "2016-12-21T20:00:00+0100",
+      "id": "1823789337867044"
+    },
+    {
+      "end_time": "2016-12-21T22:00:00+0100",
+      "name": "Hertha BSC - SV Darmstadt 98",
+      "place": {
+        "name": "Ostkurve Olympiastadion",
+        "location": {
+          "city": "Berlin",
+          "country": "Germany",
+          "latitude": 52.514680982536,
+          "longitude": 13.241075889819,
+          "street": "Olympischer Platz 3",
+          "zip": "14053"
+        },
+        "id": "252661461436260"
+      },
+      "start_time": "2016-12-21T20:00:00+0100",
+      "id": "669062733244102"
+    },
+    {
+      "description": "Hier das Heimspiel als Merker für den eigenen Terminkalender. 
+
+Wer Lust auf etwas Plausch und neue Kontakte in der Hertha-Familie hat, kann gerne zu unserem Treffpunkt vor dem Spiel kommen (Parkplatz P4 am Olympiastadion). Freunde und Mitglieder von Fans@Hertha e.V. sind immer willkommen. 
+
+Erfahrungsgemäß sind ab 18:30 Uhr die ersten Leute vor Ort. 
+
+Wer ist noch dabei?
+
+fans@hertha e.V. im Internet unter http://www.fans-at-hertha.de/",
+      "end_time": "2016-12-21T22:00:00+0100",
+      "name": "Hertha BSC - SV Darmstadt 98",
+      "place": {
+        "name": "Berliner Olympiastadion",
+        "location": {
+          "city": "Berlin",
+          "country": "Germany",
+          "latitude": 52.514147212002,
+          "longitude": 13.241307762599,
+          "street": "Olympischer Platz 3",
+          "zip": "14053"
+        },
+        "id": "269726416428403"
+      },
+      "start_time": "2016-12-21T20:00:00+0100",
+      "id": "1083098878475343"
+    },
+    {
+      "description": "Die DFL muss dieses Heimspiel noch Terminieren.",
+      "end_time": "2017-04-22T17:30:00+0200",
+      "name": "Hertha BSC - VFL Wolfsburg",
+      "place": {
+        "name": "Ostkurve Olympiastadion",
+        "location": {
+          "city": "Berlin",
+          "country": "Germany",
+          "latitude": 52.514680982536,
+          "longitude": 13.241075889819,
+          "street": "Olympischer Platz 3",
+          "zip": "14053"
+        },
+        "id": "252661461436260"
+      },
+      "start_time": "2017-04-22T15:30:00+0200",
+      "id": "1684189351909066"
+    },
+    {
+      "description": "Dieses Spiel wird noch vom Verband Terminiert !
+
+Hallo Hertha — Fans!
+
+Kommt und unterstützt unsere Amas um den Heimsieg sicher zu machen.
+
+Eintritt: 8,00 €, ermäßigt 5,00 €
+
+Dauerkarteninhaber sowie Mitglieder des Team U18 und des Kids-Clubs müssen sich an der Tageskasse ein Ticket abholen und erhalten nur mit dem Ticket und der entsprechenden Mitglieds- bzw. Dauerkarte Zutritt zum Stadion. Zudem gilt dies nur, so lange Karten verfügbar sind.",
+      "end_time": "2016-12-18T15:30:00+0100",
+      "name": "Hertha BSC II - Leipzig II",
+      "place": {
+        "name": "Olympiapark-Amateurstadion",
+        "location": {
+          "city": "Berlin",
+          "country": "Germany",
+          "latitude": 52.5172,
+          "longitude": 13.2367,
+          "street": "Hanns-Braun-Straße",
+          "zip": "14053"
+        },
+        "id": "528281483868691"
+      },
+      "start_time": "2016-12-18T13:30:00+0100",
+      "id": "1146040805489791"
+    },
+    {
+      "end_time": "2016-12-17T17:20:00+0100",
+      "name": "Leipzig - Hertha BSC",
+      "place": {
+        "name": "Zentralstadion",
+        "location": {
+          "city": "Leipzig",
+          "country": "Germany",
+          "latitude": 51.345794,
+          "longitude": 12.348219,
+          "street": "Am Sportforum 3",
+          "zip": "04105"
+        },
+        "id": "138704346149099"
+      },
+      "start_time": "2016-12-17T15:30:00+0100",
+      "id": "1173677082726904"
+    },
+    {
+      "description": "DIeses Spiel wird noch von der DFL Terminiert !",
+      "end_time": "2017-02-18T17:30:00+0100",
+      "name": "Hertha BSC - FC Bayern München",
+      "place": {
+        "name": "Ostkurve Olympiastadion",
+        "location": {
+          "city": "Berlin",
+          "country": "Germany",
+          "latitude": 52.514680982536,
+          "longitude": 13.241075889819,
+          "street": "Olympischer Platz 3",
+          "zip": "14053"
+        },
+        "id": "252661461436260"
+      },
+      "start_time": "2017-02-18T15:30:00+0100",
+      "id": "588293051358070"
+    },
+    {
+      "description": "Dieses Spiel wird noch von der DFL Terminiert !",
+      "end_time": "2017-04-01T17:30:00+0200",
+      "name": "Hertha BSC - TSG 1899 Hoffenheim",
+      "place": {
+        "name": "Ostkurve Olympiastadion",
+        "location": {
+          "city": "Berlin",
+          "country": "Germany",
+          "latitude": 52.514680982536,
+          "longitude": 13.241075889819,
+          "street": "Olympischer Platz 3",
+          "zip": "14053"
+        },
+        "id": "252661461436260"
+      },
+      "start_time": "2017-04-01T15:30:00+0200",
+      "id": "1129433783803777"
+    },
+    {
+      "description": "19. Spieltag der Saison 2016/2017
+Anstoss: 15:30 Uhr
+Stadionöffnung: ca. 90 Minuten vor Anpfiff",
+      "end_time": "2017-02-04T17:30:00+0100",
+      "name": "Hertha BSC vs. FC Ingolstadt 04",
+      "place": {
+        "name": "Olympiastadion Berlin",
+        "location": {
+          "city": "Berlin",
+          "country": "Germany",
+          "latitude": 52.51452,
+          "longitude": 13.24328,
+          "street": "Olympischer Platz 3",
+          "zip": "14053"
+        },
+        "id": "411299868987036"
+      },
+      "start_time": "2017-02-04T15:30:00+0100",
+      "id": "1825861014354007"
+    },
+    {
+      "description": "21. Spieltag der Bundesliga-Saison 2016 / 2017
+
+ Der Spieltag ist noch nicht terminiert!",
+      "name": "Hertha BSC Berlin - FC Bayern München",
+      "place": {
+        "name": "Olympiastadion Berlin",
+        "location": {
+          "city": "Berlin",
+          "country": "Germany",
+          "latitude": 52.51452,
+          "longitude": 13.24328,
+          "street": "Olympischer Platz 3",
+          "zip": "14053"
+        },
+        "id": "411299868987036"
+      },
+      "start_time": "2017-02-18T15:30:00+0100",
+      "id": "1821976014698157"
+    },
+    {
+      "description": "Hier das Auswärtsspiel als Merker und Planungshilfe für den eigenen Terminkalender. 
+
+Wer ist noch dabei?
+
+fans@hertha e.V. im Internet unter http://www.fans-at-hertha.de/",
+      "end_time": "2016-12-17T17:30:00+0100",
+      "name": "Leipzig - Hertha BSC",
+      "place": {
+        "name": "Red Bull Arena",
+        "location": {
+          "city": "Leipzig",
+          "country": "Germany",
+          "latitude": 51.345672423956,
+          "longitude": 12.348404131872,
+          "street": "Am Sportforum 3",
+          "zip": "04105"
+        },
+        "id": "203505363003660"
+      },
+      "start_time": "2016-12-17T15:30:00+0100",
+      "id": "1233752336688490"
+    },
+    {
+      "description": "Dieses Spiel wird noch von der DFL Terminiert !",
+      "end_time": "2017-04-08T17:30:00+0200",
+      "name": "Hertha BSC - FC Augsburg",
+      "place": {
+        "name": "Ostkurve Olympiastadion",
+        "location": {
+          "city": "Berlin",
+          "country": "Germany",
+          "latitude": 52.514680982536,
+          "longitude": 13.241075889819,
+          "street": "Olympischer Platz 3",
+          "zip": "14053"
+        },
+        "id": "252661461436260"
+      },
+      "start_time": "2017-04-08T15:30:00+0200",
+      "id": "653586604796006"
+    },
+    {
+      "end_time": "2017-02-04T17:30:00+0100",
+      "name": "Hertha BSC - FC Ingolstadt 04",
+      "place": {
+        "name": "Ostkurve Olympiastadion",
+        "location": {
+          "city": "Berlin",
+          "country": "Germany",
+          "latitude": 52.514680982536,
+          "longitude": 13.241075889819,
+          "street": "Olympischer Platz 3",
+          "zip": "14053"
+        },
+        "id": "252661461436260"
+      },
+      "start_time": "2017-02-04T15:30:00+0100",
+      "id": "157415948038127"
+    },
+    {
+      "end_time": "2016-12-03T17:30:00+0100",
+      "name": "Bundesliga, 13. Spieltag, VfL Wolfsburg - Hertha BSC",
+      "place": {
+        "name": "Volkswagen Arena",
+        "location": {
+          "city": "Wolfsburg",
+          "country": "Germany",
+          "latitude": 52.431944,
+          "longitude": 10.803889,
+          "street": "In den Allerwiesen 1",
+          "zip": "38446"
+        },
+        "id": "137384756307882"
+      },
+      "start_time": "2016-12-03T15:30:00+0100",
+      "id": "1091484630898688"
+    },
+    {
+      "description": "Auf nach Golfsburg und den Wölfen zu Käfern verarbeiten!",
+      "name": "Bundesliga 13. Spieltag: VfL Wolfsburg vs Hertha BSC",
+      "place": {
+        "name": "Volkswagen Arena",
+        "location": {
+          "city": "Wolfsburg",
+          "country": "Germany",
+          "latitude": 52.431944,
+          "longitude": 10.803889,
+          "street": "In den Allerwiesen 1",
+          "zip": "38446"
+        },
+        "id": "137384756307882"
+      },
+      "start_time": "2016-12-03T15:30:00+0100",
+      "id": "1797600873816230"
+    },
+    {
+      "description": "Derbytime - 7 Jahre Tradition �",
+      "end_time": "2016-12-17T17:20:00+0100",
+      "name": "RB Leipzig vs Hertha BSC",
+      "place": {
+        "name": "Red Bull Arena",
+        "location": {
+          "city": "Leipzig",
+          "country": "Germany",
+          "latitude": 51.345672423956,
+          "longitude": 12.348404131872,
+          "street": "Am Sportforum 3",
+          "zip": "04105"
+        },
+        "id": "203505363003660"
+      },
+      "start_time": "2016-12-17T15:30:00+0100",
+      "id": "1683977021930352"
+    }
+  ],
+  "paging": {
+    "cursors": {
+      "before": "MAZDZD",
+      "after": "MjQZD"
+    },
+    "next": "https://graph.facebook.com/v2.8/search?access_token=EAACEdEose0cBAOapBiqciJTJZBtmJwxfNZCkdWTHmfbnYeEt3ZAs60TO1NJo6WvGLCZCgRlGa1GRE4tgorm9GLGIAg5tY5jcBwpHOtnPe8fbj5I2H7zsZAd1S3hnBscBV9IB7OjZBfoMkfP2CYxoGTpffAfG0NmW3DrdIu95IDIwZDZD&pretty=0&q=Hertha&type=event&limit=25&after=MjQZD"
+  }
+}

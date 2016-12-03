@@ -1,26 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" >
-
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <FrameLayout android:id="@+id/map_frame"
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="0.9" >
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="300dp"
+        android:layout_gravity="bottom"
+        android:layout_weight="0.18">
 
         <EditText
             android:text="Start"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/start_text"
-            android:clickable="true"
-            android:editable="true"
             android:elegantTextHeight="false"/>
 
         <Button
@@ -34,6 +39,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/end_text"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:text="Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button3"
+                android:layout_weight="1"/>
+
+            <TimePicker
+                android:layout_width="181dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/timePicker"
+                android:numbersBackgroundColor="@color/cast_expanded_controller_background_color"
+                android:numbersSelectorColor="@android:color/white"
+                android:numbersInnerTextColor="@color/cast_expanded_controller_background_color"
+                android:numbersTextColor="@color/cast_expanded_controller_background_color"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 
