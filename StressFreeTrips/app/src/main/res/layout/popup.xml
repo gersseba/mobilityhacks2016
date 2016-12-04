@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
     android:layout_marginBottom="5dp"
-    android:background="@color/cast_expanded_controller_ad_container_white_stripe_color">
+    android:background="@color/cast_expanded_controller_progress_text_color"
+    tools:background="@android:color/white">
 
     <TextView
         android:text="Change on Route"
@@ -160,6 +162,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <Button
+            android:text="Cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cancel"
+            android:layout_weight="1" />
+
+        <Button
+            android:text="Accept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/accept"
+            android:layout_weight="1" />
     </LinearLayout>
 
 </LinearLayout>

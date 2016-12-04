@@ -60,29 +60,13 @@ public class MapsFragment extends Fragment {
 
         mMapView.onResume(); // needed to get the map to display immediately
 
+        new FacebookConnect();
+
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    final LatLng[] stops = BvgConnect.getTrip();
-                    SlideActivity.mainActivity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            drawPrimaryLinePath(stops, Color.GREEN);
-                        }
-                    });
-                } catch (Exception e){
-                    Log.e("bvg",e.toString());
-                }
-            }
-        }).start();
-
-
         mMapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap mMap) {
@@ -98,6 +82,22 @@ public class MapsFragment extends Fragment {
                 for(int i = 0; i < 17; i ++) {
                     addCircle(randomPoint(), mRandom.nextInt(250) + 250, colors[mRandom.nextInt(3)]);
                 }
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            final LatLng[] stops = BvgConnect.getTrip(BvgConnect.WESTKREUZ,BvgConnect.ALEXANDERPLATZ,BvgConnect.OSTKREUZ);
+                            SlideActivity.mainActivity.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    drawPrimaryLinePath(stops, Color.GREEN);
+                                }
+                            });
+                        } catch (Exception e){
+                            Log.e("bvg",e.toString());
+                        }
+                    }
+                }).start();
             }
         });
 
