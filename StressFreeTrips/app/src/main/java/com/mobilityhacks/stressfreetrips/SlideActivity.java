@@ -1,6 +1,7 @@
 package com.mobilityhacks.stressfreetrips;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -8,12 +9,18 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.PopupWindowCompat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.Toolbar;
 
+import com.google.android.gms.games.internal.PopupManager;
 import com.google.android.gms.maps.model.LatLng;
 
 /**
@@ -40,19 +47,21 @@ public class SlideActivity extends FragmentActivity {
      */
     private PagerAdapter mPagerAdapter;
 
-    protected MapsFragment mMapFragment;
+    public static MapsFragment mMapFragment;
 
     protected SlidePageFragement mSlidePageFragement;
+
+    protected Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slide);
 
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setActionBar(myToolbar);
+        mToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setActionBar(mToolbar);
 
-        getMenuInflater().inflate(R.menu.toolbar, myToolbar.getMenu());
+        getMenuInflater().inflate(R.menu.toolbar, mToolbar.getMenu());
 
         // Instantiate a ViewPager and a PagerAdapter.
         mPager = (ViewPager) findViewById(R.id.pager);
@@ -60,8 +69,6 @@ public class SlideActivity extends FragmentActivity {
         mPager.setAdapter(mPagerAdapter);
 
         mainActivity = this;
-
-
     }
 
     @Override
@@ -127,6 +134,42 @@ public class SlideActivity extends FragmentActivity {
     }
 
     public boolean onNotificationClick(MenuItem item) {
+        View popupView = getLayoutInflater().inflate(R.layout.popup, null);
+        final PopupWindow popupWindow = new PopupWindow(
+                popupView,
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        popupWindow.showAsDropDown(mToolbar);
+        Button cancel = (Button) popupView.findViewById(R.id.cancel);
+        Button accept = (Button) popupView.findViewById(R.id.accept);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
+        accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            final LatLng[] stops = BvgConnect.getTrip(BvgConnect.WESTKREUZ,BvgConnect.SUEDKREUZ,BvgConnect.OSTKREUZ);
+                            SlideActivity.mainActivity.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    SlideActivity.mMapFragment.drawPrimaryLinePath(stops, Color.GREEN);
+                                    popupWindow.dismiss();
+                                }
+                            });
+                        } catch (Exception e){
+                            Log.e("bvg",e.toString());
+                        }
+                    }
+                }).start();
+            }
+        });
         return true;
     }
 }

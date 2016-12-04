@@ -15,9 +15,14 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by Owner on 03.12.2016.
@@ -32,6 +37,10 @@ public class MapsFragment extends Fragment {
     private final static LatLng WOANDERS = new LatLng(52.5, 13.4);
     private final static LatLng NOCHWOANDERS = new LatLng(52.6, 13.43);
 
+    private ArrayList<Circle> circles = new ArrayList<>();
+    private ArrayList<Polyline> lines = new ArrayList<>();
+
+    private FacebookQueryThread mFacebookQueryThread = new FacebookQueryThread();
 
 
     @Override
@@ -50,42 +59,6 @@ public class MapsFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    final LatLng[] stops = BvgConnect.getTrip();
-                    SlideActivity.mainActivity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            drawPrimaryLinePath(stops, Color.GREEN);
-                        }
-                    });
-                } catch (Exception e){
-                    Log.e("bvg",e.toString());
-                }
-            }
-        }).start();
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    final LatLng[] stops = FacebookConnect.getEvents();
-                    SlideActivity.mainActivity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            for(int i = 0; i < stops.length; i ++) {
-                                addCircle(stops[i].latitude, stops[i].longitude, 200, Color.RED);
-                            }
-                        }
-                    });
-                } catch (Exception e){
-                    Log.e("bvg",e.toString());
-                }
-            }
-        }).start();
-
         mMapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap mMap) {
@@ -95,26 +68,59 @@ public class MapsFragment extends Fragment {
                 LatLng berlin = new LatLng(52.52, 13.41);
 
                 // For zooming automatically to the location of the marker
-                CameraPosition cameraPosition = new CameraPosition.Builder().target(berlin).zoom(12).build();
+                CameraPosition cameraPosition = new CameraPosition.Builder().target(berlin).zoom(10).build();
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
                 addCircle(52.521918, 13.413215, 200, Color.RED); // alexanderplatz
-                drawPrimaryLinePath(new LatLng[]{WOANDERS, ALEX, NOCHWOANDERS}, Color.BLUE);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            final LatLng[] stops = BvgConnect.getTrip(BvgConnect.WESTKREUZ,BvgConnect.ALEXANDERPLATZ,BvgConnect.OSTKREUZ);
+                            SlideActivity.mainActivity.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    drawPrimaryLinePath(stops, Color.GREEN);
+                                }
+                            });
+                        } catch (Exception e){
+                            Log.e("bvg",e.toString());
+                        }
+                    }
+                }).start();
             }
         });
+        mFacebookQueryThread.start();
 
         return rootView;
     }
 
-    private void addCircle(double lat, double lng, int radius, int color) {
+    public void addCircle(double lat, double lng, int radius, int color) {
         color |= 0xFF000000;
         color &= 0x88FFFFFF;
-        googleMap.addCircle(new CircleOptions().center(new LatLng(lat, lng))
+        circles.add(googleMap.addCircle(new CircleOptions().center(new LatLng(lat, lng))
                 .radius(radius)
                 .strokeColor(Color.TRANSPARENT)
-                .fillColor(color));
+                .fillColor(color)));
     }
 
-    private void drawPrimaryLinePath( LatLng[] locsToDraw, int color )    {
+    public void clearCircles() {
+        Iterator<Circle> circleIterator = circles.iterator();
+        while(circleIterator.hasNext()) {
+            circleIterator.next().remove();
+            circleIterator.remove();
+        }
+    }
+
+    public void clearLines() {
+        Iterator<Polyline> lineIterator = lines.iterator();
+        while(lineIterator.hasNext()) {
+            lineIterator.next().remove();
+            lineIterator.remove();
+        }
+    }
+
+    public void drawPrimaryLinePath( LatLng[] locsToDraw, int color )    {
         if ( locsToDraw.length < 2 ) {
             return;
         }
@@ -130,7 +136,7 @@ public class MapsFragment extends Fragment {
             options.add( latLng );
         }
 
-        googleMap.addPolyline( options );
+        lines.add(googleMap.addPolyline( options ));
 
     }
 
@@ -149,6 +155,7 @@ public class MapsFragment extends Fragment {
 
     @Override
     public void onDestroy() {
+        mFacebookQueryThread.stop = true;
         super.onDestroy();
         mMapView.onDestroy();
     }

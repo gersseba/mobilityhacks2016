@@ -26,13 +26,21 @@ import java.util.List;
 
 public class BvgConnect {
 
-    public static LatLng[] getTrip() throws IOException, URISyntaxException {
+    public static final String WESTKREUZ = "A=1@O=S%20Westkreuz%20(Berlin)@X=13283036@Y=52501147@U=86@L=009024102@B=1@V=3.9,@p=1480610652@";
+    public static final String OSTKREUZ = "A=1@O=S%20Ostkreuz%20Bhf%20(Berlin)@X=13469095@Y=52502846@U=86@L=009120003@B=1@V=3.9,@p=1480610652@";
+    public static final String SUEDKREUZ = "A=1@O=S%20Südkreuz%20Bhf%20(Berlin)@X=13365575@Y=52475465@U=86@L=009058101@B=1@V=3.9,@p=1480610652@";
+    public static final String ALEXANDERPLATZ = "A=1@O=S+U%20Alexanderplatz%20Bhf%20(Berlin)@X=13411267@Y=52521508@U=86@L=009100003@B=1@V=3.9,@p=1480610652@";
 
+    public static LatLng[] getTrip(String from, String via, String to) throws IOException, URISyntaxException {
+        String url = String.format("http://demo.hafas.de/openapi/vbb-proxy/trip?originId=%s&viaId=%s&passlist=1&destId=%s&format=json&accessId=BVG-VBB-Dezember&time=08:00&date=2016-12-12",from,via, to);
+        return queryBvg(url);
+    }
+
+    private static LatLng[] queryBvg(String url) throws IOException, URISyntaxException {
         HttpClient client = new DefaultHttpClient();
-        HttpGet httpGet = new HttpGet(new URI("http://demo.hafas.de/openapi/vbb-proxy/trip?originId=009110003&passlist=1&destId=009100042&format=json&accessId=BVG-VBB-Dezember&date=2016-12-12"));
+        HttpGet httpGet = new HttpGet(new URI(url));
         HttpResponse serverResponse = client.execute(httpGet);
         BasicResponseHandler handler = new BasicResponseHandler();
-
         String sResponse = handler.handleResponse(serverResponse);
         List<LatLng> route = new LinkedList<>();
         try {
