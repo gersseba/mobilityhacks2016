@@ -64,7 +64,10 @@ public class FacebookConnect  {
         request.executeAsync();
     }
 
-    public static LatLng[] getEvents() throws IOException, URISyntaxException {
+    public static LatLng[] getEvents() {
+        if(1 == 1) {
+            return new LatLng[] {new LatLng(52.521918, 13.413215)};
+        }
         HttpResponse response = null;
         String json;
         try {

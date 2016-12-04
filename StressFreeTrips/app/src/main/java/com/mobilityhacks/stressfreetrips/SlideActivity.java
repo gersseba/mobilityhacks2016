@@ -2,6 +2,7 @@ package com.mobilityhacks.stressfreetrips;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -15,8 +16,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toolbar;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -47,9 +50,15 @@ public class SlideActivity extends FragmentActivity {
 
     public static MapsFragment mMapFragment;
 
-    protected RouteFragment mRouteFragment;
+    public static RouteFragment mRouteFragment;
 
     protected Toolbar mToolbar;
+
+    protected boolean mPopupShown = false;
+
+    protected int mState = 0; // 0 = normal, 1 = small congestion, 2 = large congestion
+
+    protected boolean mShowNotification;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +66,19 @@ public class SlideActivity extends FragmentActivity {
         setContentView(R.layout.activity_slide);
 
         mToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        mToolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LatLng[] latLngs = FacebookConnect.getEvents();
+                if(mRouteFragment == null) {
+                    mRouteFragment = new RouteFragment();
+                }
+                for(LatLng latLng : latLngs) {
+                    mRouteFragment.setCircle(latLng, 500, Color.RED);
+                }
+                setState(mState + 1);
+            }
+        });
         setActionBar(mToolbar);
 
         getMenuInflater().inflate(R.menu.toolbar, mToolbar.getMenu());
@@ -67,6 +89,51 @@ public class SlideActivity extends FragmentActivity {
         mPager.setAdapter(mPagerAdapter);
 
         mainActivity = this;
+    }
+
+    private void showNotification(boolean show) {
+        mShowNotification = show;
+        Drawable drawable;
+        if(show) {
+            drawable = getResources().getDrawable(R.drawable.ic_action_new_notification, null);
+        } else {
+            drawable = getResources().getDrawable(R.drawable.ic_action_no_notification, null);
+        }
+        // todo show notification
+        mToolbar.getMenu().getItem(0).setIcon(drawable);
+    }
+
+    private void setState(int state) {
+        this.mState = state < 3 ? state : 3;
+        Drawable drawable;
+        switch (mState) {
+            case 0:
+                drawable = getResources().getDrawable(R.drawable.ic_action_no_notification, null);
+                break;
+            case 1:
+            case 2:
+                drawable = getResources().getDrawable(R.drawable.ic_action_new_notification, null);
+                break;
+            case 3:
+            default:
+                drawable = getResources().getDrawable(R.drawable.ic_action_no_notification, null);
+                break;
+        }
+        mToolbar.getMenu().getItem(0).setIcon(drawable);
+    }
+
+    private void changePopupForState(View popupView) {
+        switch (mState) {
+            default:
+            case 0:
+            case 1:
+                break;
+            case 2:
+                ((ImageView) popupView.findViewById(R.id.bonus_points)).setImageDrawable(getResources().getDrawable(R.drawable.ic_action_action_report_big_problem, null));
+                ((TextView) popupView.findViewById(R.id.expected_delay)).setText(getResources().getString(R.string.big_delay));
+                ((TextView) popupView.findViewById(R.id.extra_time)).setText(getResources().getString(R.string.additionalTimeBig));
+                ((TextView) popupView.findViewById(R.id.extra_bonus_points)).setText(getResources().getString(R.string.additionalBonusBig));
+        }
     }
 
     @Override
@@ -132,43 +199,59 @@ public class SlideActivity extends FragmentActivity {
     }
 
     public boolean onNotificationClick(MenuItem item) {
-        View popupView = getLayoutInflater().inflate(R.layout.popup, null);
-        final PopupWindow popupWindow = new PopupWindow(
-                popupView,
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT);
+        if(mState > 0 && !mPopupShown) {
+            mPopupShown = true;
+            View popupView = getLayoutInflater().inflate(R.layout.popup, null);
+            final PopupWindow popupWindow = new PopupWindow(
+                    popupView,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            changePopupForState(popupView);
 
-        popupWindow.showAsDropDown(mToolbar);
-        Button cancel = (Button) popupView.findViewById(R.id.cancel);
-        Button accept = (Button) popupView.findViewById(R.id.accept);
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popupWindow.dismiss();
-            }
-        });
-        accept.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            final LatLng[] stops = BvgConnect.getTrip(BvgConnect.WESTKREUZ,BvgConnect.SUEDKREUZ,BvgConnect.OSTKREUZ);
-                            SlideActivity.mainActivity.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    SlideActivity.mMapFragment.drawPrimaryLinePath(stops, Color.GREEN);
-                                    popupWindow.dismiss();
-                                }
-                            });
-                        } catch (Exception e){
-                            Log.e("bvg",e.toString());
+            popupWindow.showAsDropDown(mToolbar);;
+            Button cancel = (Button) popupView.findViewById(R.id.cancel);
+            Button accept = (Button) popupView.findViewById(R.id.accept);
+            cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    popupWindow.dismiss();
+                    mPopupShown = false;
+                    showNotification(false);
+                }
+            });
+            accept.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setState(3);
+                    mPager.setCurrentItem(1);
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                final LatLng[] oldstops = BvgConnect.getTrip(BvgConnect.WESTKREUZ,BvgConnect.ALEXANDERPLATZ,BvgConnect.OSTKREUZ);
+                                final LatLng[] stops = BvgConnect.getTrip(BvgConnect.WESTKREUZ,BvgConnect.SUEDKREUZ,BvgConnect.OSTKREUZ);
+                                SlideActivity.mainActivity.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        SlideActivity.mRouteFragment.drawLines(stops, oldstops);
+                                        popupWindow.dismiss();
+                                        ((TextView)mRouteFragment.getActivity().findViewById(R.id.travel_time)).setText(getResources().getString(R.string.new_duration));
+                                        ((TextView)mRouteFragment.getActivity().findViewById(R.id.source_line)).setText(getResources().getString(R.string.new_line));
+                                        ((TextView)mRouteFragment.getActivity().findViewById(R.id.dest_line)).setText(getResources().getString(R.string.new_line));
+                                        ((TextView)mRouteFragment.getActivity().findViewById(R.id.ride_bonus_points)).setText(getResources().getString(R.string.new_bonus));
+                                        mPopupShown = false;
+                                        showNotification(false);
+                                    }
+                                });
+                            } catch (Exception e){
+                                Log.e("bvg",e.toString());
+                            }
                         }
-                    }
-                }).start();
-            }
-        });
+                    }).start();
+                }
+            });
+        }
+
         return true;
     }
 }

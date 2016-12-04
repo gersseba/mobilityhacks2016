@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -17,52 +18,109 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
         android:layout_gravity="bottom"
-        android:layout_weight="0.18">
-
-        <EditText
-            android:text="Departure stop"
-            android:layout_width="340dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:id="@+id/start_text"
-            android:elegantTextHeight="false"/>
-
-        <Button
-            android:text="Intermediate Stops"
-            android:layout_width="340dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:id="@+id/button2"/>
-
-        <EditText
-            android:text="Arrival stop"
-            android:layout_width="340dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:id="@+id/end_text"/>
+        android:layout_weight="0.18"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_height="180dp">
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <Button
-                android:text="Button"
+            <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/button3"
-                android:layout_weight="1"/>
+                android:src="@drawable/ic_action_device_gps_fixed"
+                android:id="@+id/imageButton3"
+                android:background="@color/cast_expanded_controller_ad_container_white_stripe_color"
+                android:layout_gravity="center_vertical"/>
 
-            <TimePicker
-                android:layout_width="181dp"
+            <EditText
+                android:text="Departure"
+                android:layout_width="256dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/timePicker"
-                android:numbersBackgroundColor="@color/cast_expanded_controller_background_color"
-                android:numbersSelectorColor="@android:color/white"
-                android:numbersInnerTextColor="@color/cast_expanded_controller_background_color"
-                android:numbersTextColor="@color/cast_expanded_controller_background_color"/>
+                android:layout_gravity="center"
+                android:id="@+id/start_text"
+                android:elegantTextHeight="false"
+                />
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_action_content_clear"
+                android:id="@+id/imageButton4"
+                android:background="@color/cast_expanded_controller_ad_container_white_stripe_color"
+                android:layout_gravity="center_vertical"/>
+        </LinearLayout>
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_action_dots"
+            android:id="@+id/imageButton2"
+            android:background="@color/cast_expanded_controller_ad_container_white_stripe_color"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_action_device_gps_fixed"
+                android:id="@+id/imageButton6"
+                android:background="@color/cast_expanded_controller_ad_container_white_stripe_color"
+                android:layout_gravity="center_vertical"/>
+
+            <EditText
+                android:text="Arrival"
+                android:layout_width="256dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/end_text"
+                android:elegantTextHeight="false"
+                />
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_action_content_clear"
+                android:id="@+id/imageButton5"
+                android:background="@color/cast_expanded_controller_ad_container_white_stripe_color"
+                android:layout_gravity="center_vertical"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:text="Now"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button2"
+                android:layout_weight="1"
+                style="@style/Widget.AppCompat.Button.Borderless"/>
+
+            <Button
+                android:text="Later"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button4"
+                android:layout_weight="1"
+                style="@style/Widget.AppCompat.Button.Borderless"/>
+
+            <Button
+                android:text="Search"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/button3"
+                android:layout_weight="1"
+                android:layout_gravity="right"/>
 
         </LinearLayout>
 

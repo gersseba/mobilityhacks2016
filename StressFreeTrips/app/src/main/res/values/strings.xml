@@ -4,4 +4,18 @@
     <string name="facebook_app_access_token">1361064113946047|-P8cq99yo9KSYvxHjw8d0gG2QhQ</string>
     <string name="facebook_app_id">1361064113946047</string>
     <string name="facebook_user_id">885049648204666</string>
+    <string name="destination">Ostkreuz</string>
+    <string name="source">Westkreuz</string>
+    <string name="oldLine">S5 </string>
+    <string name="new_line">S41</string>
+    <string name="additionalTimeSmall">10 min</string>
+    <string name="additionalBonusSmall">15</string>
+    <string name="additionalTimeBig">10 min</string>
+    <string name="additionalBonusBig">30</string>
+    <string name="old_bonus">x 34</string>
+    <string name="new_bonus">x 64</string>
+    <string name="old_duration">34 min</string>
+    <string name="new_duration">44 min</string>
+    <string name="small_delay">2 min</string>
+    <string name="big_delay">10 min</string>
 </resources>

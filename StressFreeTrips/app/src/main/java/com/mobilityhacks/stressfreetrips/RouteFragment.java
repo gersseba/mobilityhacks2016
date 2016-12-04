@@ -1,5 +1,7 @@
 package com.mobilityhacks.stressfreetrips;
 
+import android.animation.IntEvaluator;
+import android.animation.ValueAnimator;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -34,6 +37,7 @@ public class RouteFragment extends Fragment {
 
 
     private ArrayList<Circle> circles = new ArrayList<>();
+    private ArrayList<Polyline> mOldLines = new ArrayList<>();
     private ArrayList<Polyline> lines = new ArrayList<>();
 
     @Override
@@ -84,13 +88,36 @@ public class RouteFragment extends Fragment {
         return rootView;
     }
 
-    public void addCircle(LatLng latLng, int radius, int color) {
+    public void drawLines(LatLng[] greenLine, LatLng[] greyLine) {
+        clearLines();
+        drawPrimaryLinePath(greenLine, 0xFF00FF00);
+        drawPrimaryLinePath(greyLine, 0xFFFF0000);
+    }
+
+    public void setCircle(LatLng latLng, final int radius, int color) {
+        clearCircles();
         color |= 0xFF000000;
         color &= 0x88FFFFFF;
-        circles.add(googleMap.addCircle(new CircleOptions().center(latLng)
+        final Circle circle = googleMap.addCircle(new CircleOptions().center(latLng)
                 .radius(radius)
                 .strokeColor(Color.TRANSPARENT)
-                .fillColor(color)));
+                .fillColor(color));
+        circles.add(circle);
+        ValueAnimator vAnimator = new ValueAnimator();
+        vAnimator.setRepeatCount(ValueAnimator.INFINITE);
+        vAnimator.setRepeatMode(ValueAnimator.REVERSE);  /* PULSE */
+        vAnimator.setIntValues(radius/2, radius);
+        vAnimator.setDuration(500);
+        vAnimator.setEvaluator(new IntEvaluator());
+        vAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+        vAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                float animatedFraction = valueAnimator.getAnimatedFraction();
+                circle.setRadius(radius + animatedFraction * 100);
+            }
+        });
+        vAnimator.start();
     }
 
     public void clearCircles() {

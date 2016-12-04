@@ -90,7 +90,7 @@ public class MapsFragment extends Fragment {
                             SlideActivity.mainActivity.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    drawPrimaryLinePath(stops, Color.GREEN);
+                                    SlideActivity.mRouteFragment.drawLines(stops, new LatLng[0]);
                                 }
                             });
                         } catch (Exception e){
@@ -102,7 +102,7 @@ public class MapsFragment extends Fragment {
         });
 
 
-        mFacebookQueryThread.start();
+//        mFacebookQueryThread.start();
 
         return rootView;
     }
