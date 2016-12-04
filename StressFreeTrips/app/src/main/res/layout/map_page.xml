@@ -37,8 +37,8 @@
                 android:background="@color/cast_expanded_controller_ad_container_white_stripe_color"
                 android:layout_gravity="center_vertical"/>
 
-            <EditText
-                android:text="Departure"
+            <AutoCompleteTextView
+                android:hint="Departure"
                 android:layout_width="256dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -75,8 +75,8 @@
                 android:background="@color/cast_expanded_controller_ad_container_white_stripe_color"
                 android:layout_gravity="center_vertical"/>
 
-            <EditText
-                android:text="Arrival"
+            <AutoCompleteTextView
+                android:hint="Arrival"
                 android:layout_width="256dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -110,7 +110,7 @@
                 android:text="Later"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/button4"
+                android:id="@+id/later_button"
                 android:layout_weight="1"
                 style="@style/Widget.AppCompat.Button.Borderless"/>
 

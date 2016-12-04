@@ -2,15 +2,21 @@ package com.mobilityhacks.stressfreetrips;
 
 import android.animation.IntEvaluator;
 import android.animation.ValueAnimator;
+import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.transition.Slide;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -43,9 +49,18 @@ public class MapsFragment extends Fragment {
     private ArrayList<Circle> circles = new ArrayList<>();
     private ArrayList<Polyline> lines = new ArrayList<>();
 
+    private static final String[] STARTSTATIONS = new String[] {
+            "Westhafen", "Westkreuz", "Wuhlheide"
+    };
+
+    private static final String[] ENDSTATIONS = new String[] {
+            "Ostkreuz", "Ostbahnhof", "Ostsee"
+    };
+
     private FacebookQueryThread mFacebookQueryThread = new FacebookQueryThread();
 
     private Random mRandom = new Random();
+
 
     {
         mRandom.setSeed(200);
@@ -67,6 +82,25 @@ public class MapsFragment extends Fragment {
 
         new FacebookConnect();
 
+        Button button = (Button)rootView.findViewById(R.id.later_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(SlideActivity.mainActivity, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        LatLng[] latLngs = FacebookConnect.getEvents();
+                        int color = 0xF0FF8800;
+                        for(LatLng latLng : latLngs) {
+                            SlideActivity.mRouteFragment.setCircle(latLng, 500, color);
+                            SlideActivity.mMapFragment.setCircle(latLng, 500, color);
+                        }
+                        SlideActivity.mainActivity.setState();
+                        SlideActivity.mPager.setCurrentItem(1);
+                    }
+                }, 2016, 12, 4).show();
+            }
+        });
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
         } catch (Exception e) {
@@ -89,6 +123,16 @@ public class MapsFragment extends Fragment {
                 }
             }
         });
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(SlideActivity.mainActivity, android.R.layout.simple_dropdown_item_1line, STARTSTATIONS);
+        AutoCompleteTextView textView = (AutoCompleteTextView) rootView.findViewById(R.id.start_text);
+        textView.setAdapter(adapter);
+
+
+        ArrayAdapter<String> adapterEnd = new ArrayAdapter<String>(SlideActivity.mainActivity, android.R.layout.simple_dropdown_item_1line, ENDSTATIONS);
+        AutoCompleteTextView textViewEnd = (AutoCompleteTextView) rootView.findViewById(R.id.end_text);
+        textViewEnd.setAdapter(adapterEnd);
+
 
 
 //        mFacebookQueryThread.start();
