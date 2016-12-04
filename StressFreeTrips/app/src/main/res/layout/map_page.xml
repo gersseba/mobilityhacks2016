@@ -38,7 +38,7 @@
                 android:layout_gravity="center_vertical"/>
 
             <AutoCompleteTextView
-                android:text="Departure"
+                android:hint="Departure"
                 android:layout_width="256dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -76,7 +76,7 @@
                 android:layout_gravity="center_vertical"/>
 
             <AutoCompleteTextView
-                android:text="Arrival"
+                android:hint="Arrival"
                 android:layout_width="256dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
