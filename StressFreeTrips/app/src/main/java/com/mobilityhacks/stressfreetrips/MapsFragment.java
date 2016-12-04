@@ -1,5 +1,7 @@
 package com.mobilityhacks.stressfreetrips;
 
+import android.animation.IntEvaluator;
+import android.animation.ValueAnimator;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -48,6 +51,8 @@ public class MapsFragment extends Fragment {
         mRandom.setSeed(200);
     }
 
+    protected Circle mNotificationCircle;
+
     private final static int[] colors = new int[] {Color.YELLOW | 0x88000000, Color.RED | 0x88000000, Color.argb(88, 255, 128,0)};
 
 
@@ -73,7 +78,7 @@ public class MapsFragment extends Fragment {
                 googleMap = mMap;
 
 
-                LatLng berlin = new LatLng(52.521918, 13.413215);
+                LatLng berlin = new LatLng(52.519684, 13.382435);
 
                 // For zooming automatically to the location of the marker
                 CameraPosition cameraPosition = new CameraPosition.Builder().target(berlin).zoom(11).build();
@@ -82,22 +87,6 @@ public class MapsFragment extends Fragment {
                 for(int i = 0; i < 17; i ++) {
                     addCircle(randomPoint(), mRandom.nextInt(250) + 250, colors[mRandom.nextInt(3)]);
                 }
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            final LatLng[] stops = BvgConnect.getTrip(BvgConnect.WESTKREUZ,BvgConnect.ALEXANDERPLATZ,BvgConnect.OSTKREUZ);
-                            SlideActivity.mainActivity.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    SlideActivity.mRouteFragment.drawLines(stops, new LatLng[0]);
-                                }
-                            });
-                        } catch (Exception e){
-                            Log.e("bvg",e.toString());
-                        }
-                    }
-                }).start();
             }
         });
 
@@ -118,6 +107,32 @@ public class MapsFragment extends Fragment {
                 .radius(radius)
                 .strokeColor(Color.TRANSPARENT)
                 .fillColor(color)));
+    }
+
+    public void setCircle(LatLng latLng, final int radius, int color) {
+        if(mNotificationCircle != null) {
+            mNotificationCircle.remove();
+        }
+        final Circle circle = googleMap.addCircle(new CircleOptions().center(latLng)
+                .radius(radius)
+                .strokeColor(Color.TRANSPARENT)
+                .fillColor(color));
+        mNotificationCircle = circle;
+        ValueAnimator vAnimator = new ValueAnimator();
+        vAnimator.setRepeatCount(ValueAnimator.INFINITE);
+        vAnimator.setRepeatMode(ValueAnimator.REVERSE);  /* PULSE */
+        vAnimator.setIntValues(radius/2, radius);
+        vAnimator.setDuration(500);
+        vAnimator.setEvaluator(new IntEvaluator());
+        vAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+        vAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                float animatedFraction = valueAnimator.getAnimatedFraction();
+                circle.setRadius(radius + animatedFraction * 100);
+            }
+        });
+        vAnimator.start();
     }
 
     public void clearCircles() {

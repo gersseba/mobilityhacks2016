@@ -61,7 +61,7 @@ public class RouteFragment extends Fragment {
                 googleMap = mMap;
 
 
-                LatLng berlin = new LatLng(52.521918, 13.413215);
+                LatLng berlin = new LatLng(52.519684, 13.382435);
 
                 // For zooming automatically to the location of the marker
                 CameraPosition cameraPosition = new CameraPosition.Builder().target(berlin).zoom(11).build();
@@ -91,7 +91,7 @@ public class RouteFragment extends Fragment {
     public void drawLines(LatLng[] greenLine, LatLng[] greyLine) {
         clearLines();
         drawPrimaryLinePath(greenLine, 0xFF00FF00);
-        drawPrimaryLinePath(greyLine, 0xFFFF0000);
+        drawPrimaryLinePath(greyLine, 0x88FF0000);
     }
 
     public void setCircle(LatLng latLng, final int radius, int color) {
@@ -101,7 +101,8 @@ public class RouteFragment extends Fragment {
         final Circle circle = googleMap.addCircle(new CircleOptions().center(latLng)
                 .radius(radius)
                 .strokeColor(Color.TRANSPARENT)
-                .fillColor(color));
+                .fillColor(color)
+                .zIndex(1));
         circles.add(circle);
         ValueAnimator vAnimator = new ValueAnimator();
         vAnimator.setRepeatCount(ValueAnimator.INFINITE);
@@ -143,10 +144,10 @@ public class RouteFragment extends Fragment {
 
         PolylineOptions options = new PolylineOptions();
 
-        options.color( color );
-        options.width( 5 );
-        options.visible( true );
-
+        options.color( color )
+                .width( 10 )
+                .visible( true )
+                .zIndex(0);
         for ( LatLng latLng : locsToDraw )
         {
             options.add( latLng );
