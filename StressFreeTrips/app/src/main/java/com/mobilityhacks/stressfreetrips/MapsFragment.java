@@ -86,7 +86,7 @@ public class MapsFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(SlideActivity.mainActivity, new DatePickerDialog.OnDateSetListener() {
+                new DatePickerDialog(SlideActivity.mainActivity,R.style.DialogTheme, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         LatLng[] latLngs = FacebookConnect.getEvents();
