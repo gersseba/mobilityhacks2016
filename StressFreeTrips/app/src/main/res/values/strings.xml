@@ -18,4 +18,6 @@
     <string name="new_duration">44 min</string>
     <string name="small_delay">2 min</string>
     <string name="big_delay">10 min</string>
+    <string name="congestion_predicted_small">Light congestion predicted</string>
+    <string name="congestion_predicted_big">Heavy congestion predicted</string>
 </resources>

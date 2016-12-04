@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_create"
+        android:actionLayout="@layout/item"
+        android:showAsAction = "always"/>
+
+
     <item android:title="Notification"
         android:id="@+id/action_notification"
         android:icon="@drawable/ic_action_no_notification"

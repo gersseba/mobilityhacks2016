@@ -1,6 +1,11 @@
 package com.mobilityhacks.stressfreetrips;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -29,6 +34,8 @@ import com.google.android.gms.maps.model.LatLng;
  */
 
 public class SlideActivity extends FragmentActivity {
+
+    private final static int NOTIFICATION_ID = 123;
 
     public static Activity mainActivity;
 
@@ -96,11 +103,27 @@ public class SlideActivity extends FragmentActivity {
         Drawable drawable;
         if(show) {
             drawable = getResources().getDrawable(R.drawable.ic_action_new_notification, null);
+            showNotification();
         } else {
             drawable = getResources().getDrawable(R.drawable.ic_action_no_notification, null);
+            ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).cancel(NOTIFICATION_ID);
         }
         // todo show notification
         mToolbar.getMenu().getItem(0).setIcon(drawable);
+    }
+
+    private void showNotification() {
+        Intent notificationIntent = new Intent(this, SlideActivity.class);
+        PendingIntent clickIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+        Notification.Builder b = new Notification.Builder(this)
+                .setContentTitle("Route change")
+                .setContentText("Please check for alternatives")
+                .setSmallIcon(R.drawable.ic_action_new_notification)
+                .setContentIntent(clickIntent)
+                .setAutoCancel(false)
+                .setOngoing(true)
+                .setPriority(Notification.PRIORITY_MAX);
+
     }
 
     private void setState(int state) {
@@ -119,7 +142,7 @@ public class SlideActivity extends FragmentActivity {
                 drawable = getResources().getDrawable(R.drawable.ic_action_no_notification, null);
                 break;
         }
-        mToolbar.getMenu().getItem(0).setIcon(drawable);
+        mToolbar.getMenu().getItem(1).setIcon(drawable);
     }
 
     private void changePopupForState(View popupView) {
@@ -133,6 +156,7 @@ public class SlideActivity extends FragmentActivity {
                 ((TextView) popupView.findViewById(R.id.expected_delay)).setText(getResources().getString(R.string.big_delay));
                 ((TextView) popupView.findViewById(R.id.extra_time)).setText(getResources().getString(R.string.additionalTimeBig));
                 ((TextView) popupView.findViewById(R.id.extra_bonus_points)).setText(getResources().getString(R.string.additionalBonusBig));
+                ((TextView) popupView.findViewById(R.id.congestion_text)).setText(getResources().getString(R.string.congestion_predicted_big));
         }
     }
 
