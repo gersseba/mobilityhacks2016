@@ -49,7 +49,7 @@ public class SlideActivity extends FragmentActivity {
      * The pager widget, which handles animation and allows swiping horizontally to access previous
      * and next wizard steps.
      */
-    private ViewPager mPager;
+    public static ViewPager mPager;
 
     /**
      * The pager adapter, which provides the pages to the view pager widget.
@@ -64,7 +64,7 @@ public class SlideActivity extends FragmentActivity {
 
     protected boolean mPopupShown = false;
 
-    protected int mState = 0; // 0 = normal, 1 = small congestion, 2 = large congestion
+    protected int mState = 1; // 0 = normal, 1 = small congestion, 2 = large congestion
 
     protected boolean mShowNotification;
 

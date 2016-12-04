@@ -2,15 +2,19 @@ package com.mobilityhacks.stressfreetrips;
 
 import android.animation.IntEvaluator;
 import android.animation.ValueAnimator;
+import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.transition.Slide;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.Button;
+import android.widget.DatePicker;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -67,6 +71,24 @@ public class MapsFragment extends Fragment {
 
         new FacebookConnect();
 
+        Button button = (Button)rootView.findViewById(R.id.later_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(SlideActivity.mainActivity, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        LatLng[] latLngs = FacebookConnect.getEvents();
+                        int color = 0xF0FF8800;
+                        for(LatLng latLng : latLngs) {
+                            SlideActivity.mRouteFragment.setCircle(latLng, 500, color);
+                            SlideActivity.mMapFragment.setCircle(latLng, 500, color);
+                        }
+                        SlideActivity.mPager.setCurrentItem(1);
+                    }
+                }, 2016, 12, 4).show();
+            }
+        });
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
         } catch (Exception e) {
