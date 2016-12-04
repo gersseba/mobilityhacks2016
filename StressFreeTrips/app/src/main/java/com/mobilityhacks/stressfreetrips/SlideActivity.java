@@ -153,7 +153,7 @@ public class SlideActivity extends FragmentActivity {
                 break;
             case 2:
                 ((ImageView) popupView.findViewById(R.id.bonus_points)).setImageDrawable(getResources().getDrawable(R.drawable.ic_action_action_report_big_problem, null));
-                ((TextView) popupView.findViewById(R.id.expected_delay)).setText(getResources().getString(R.string.big_delay));
+               // ((TextView) popupView.findViewById(R.id.expected_delay)).setText(getResources().getString(R.string.big_delay));
                 ((TextView) popupView.findViewById(R.id.extra_time)).setText(getResources().getString(R.string.additionalTimeBig));
                 ((TextView) popupView.findViewById(R.id.extra_bonus_points)).setText(getResources().getString(R.string.additionalBonusBig));
                 ((TextView) popupView.findViewById(R.id.congestion_text)).setText(getResources().getString(R.string.congestion_predicted_big));
@@ -225,7 +225,7 @@ public class SlideActivity extends FragmentActivity {
     public boolean onNotificationClick(MenuItem item) {
         if(mState > 0 && !mPopupShown) {
             mPopupShown = true;
-            View popupView = getLayoutInflater().inflate(R.layout.popup, null);
+            final View popupView = getLayoutInflater().inflate(R.layout.popup, null);
             final PopupWindow popupWindow = new PopupWindow(
                     popupView,
                     LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -241,6 +241,16 @@ public class SlideActivity extends FragmentActivity {
                     popupWindow.dismiss();
                     mPopupShown = false;
                     showNotification(false);
+                }
+            });
+            LinearLayout alternativeRoute = (LinearLayout) popupView.findViewById(R.id.alternativeroutepitch);
+            alternativeRoute.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    LinearLayout route = (LinearLayout) v;
+                    route.setBackgroundColor(0x2F000000);
+                    Button accept = (Button) popupView.findViewById(R.id.accept);
+                    accept.setEnabled(true);
                 }
             });
             accept.setOnClickListener(new View.OnClickListener() {
