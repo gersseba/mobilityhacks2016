@@ -297,7 +297,7 @@
                             android:text="@string/new_line"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/textView8"
+                            android:id="@+id/textView23"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                             />
 
@@ -306,7 +306,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:id="@+id/textView"
+                            android:id="@+id/textView24"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                             android:layout_weight="1"/>
                     </LinearLayout>
@@ -315,7 +315,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_action_dots"
-                        android:id="@+id/imageButton"
+                        android:id="@+id/imageButton3"
                         android:background="@color/cast_expanded_controller_ad_container_white_stripe_color"/>
 
                     <LinearLayout
@@ -327,7 +327,7 @@
                             android:text="@string/new_line"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/textView3"
+                            android:id="@+id/textView25"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                             />
 
@@ -336,7 +336,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:id="@+id/textView2"
+                            android:id="@+id/textView26"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                             android:layout_weight="1"/>
 
@@ -360,7 +360,7 @@
                             android:text="Additional time needed:"
                             android:layout_width="160dp"
                             android:layout_height="wrap_content"
-                            android:id="@+id/extraTimeDescription"
+                            android:id="@+id/extraTimeDescription2"
                             android:layout_marginBottom="5dp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:layout_weight="0.98"/>
@@ -387,13 +387,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_action_action_favorite"
-                            android:id="@+id/imageView3"
+                            android:id="@+id/imageView5"
                             />
 
                         <TextView
                             android:text=" Points awarded:"
                             android:layout_width="148dp"
-                            android:id="@+id/bonusPointsDescription"
+                            android:id="@+id/bonusPointsDescription2"
                             android:gravity="center_vertical"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:layout_height="match_parent"/>
@@ -402,7 +402,7 @@
                             android:text="@string/additionalBonusSmall"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:id="@+id/extra_bonus_points"
+                            android:id="@+id/extra_bonus_points2"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
@@ -504,7 +504,7 @@
                             android:text="@string/additionalTimeSmall"
                             android:layout_width="184dp"
                             android:layout_height="wrap_content"
-                            android:id="@+id/extra_time"
+                            android:id="@+id/extra_time3"
                             android:layout_marginBottom="5dp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
