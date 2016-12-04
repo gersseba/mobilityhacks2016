@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,6 +18,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Toolbar;
+
+import com.google.android.gms.maps.model.LatLng;
 
 /**
  * Created by Owner on 03.12.2016.
@@ -44,7 +47,7 @@ public class SlideActivity extends FragmentActivity {
 
     public static MapsFragment mMapFragment;
 
-    protected RoutePage mRoutePage;
+    protected RouteFragment mRouteFragment;
 
     protected Toolbar mToolbar;
 
@@ -96,15 +99,15 @@ public class SlideActivity extends FragmentActivity {
                     }
                     return mMapFragment;
                 case 1:
-                    if(mRoutePage == null) {
-                        mRoutePage = new RoutePage();
+                    if(mRouteFragment == null) {
+                        mRouteFragment = new RouteFragment();
                     }
-                    return mRoutePage;
+                    return mRouteFragment;
                 default:
-                    if(mRoutePage == null) {
-                        mRoutePage = new RoutePage();
+                    if(mRouteFragment == null) {
+                        mRouteFragment = new RouteFragment();
                     }
-                    return mRoutePage;
+                    return mRouteFragment;
             }
         }
 
