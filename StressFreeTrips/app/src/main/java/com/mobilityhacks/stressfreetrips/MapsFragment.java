@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -43,9 +45,18 @@ public class MapsFragment extends Fragment {
     private ArrayList<Circle> circles = new ArrayList<>();
     private ArrayList<Polyline> lines = new ArrayList<>();
 
+    private static final String[] STARTSTATIONS = new String[] {
+            "Westhafen", "Westkreuz", "Wuhlheide"
+    };
+
+    private static final String[] ENDSTATIONS = new String[] {
+            "Ostkreuz", "Ostbahnhof", "Ostsee"
+    };
+
     private FacebookQueryThread mFacebookQueryThread = new FacebookQueryThread();
 
     private Random mRandom = new Random();
+
 
     {
         mRandom.setSeed(200);
@@ -89,6 +100,16 @@ public class MapsFragment extends Fragment {
                 }
             }
         });
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(SlideActivity.mainActivity, android.R.layout.simple_dropdown_item_1line, STARTSTATIONS);
+        AutoCompleteTextView textView = (AutoCompleteTextView) rootView.findViewById(R.id.start_text);
+        textView.setAdapter(adapter);
+
+
+        ArrayAdapter<String> adapterEnd = new ArrayAdapter<String>(SlideActivity.mainActivity, android.R.layout.simple_dropdown_item_1line, ENDSTATIONS);
+        AutoCompleteTextView textViewEnd = (AutoCompleteTextView) rootView.findViewById(R.id.end_text);
+        textViewEnd.setAdapter(adapterEnd);
+
 
 
 //        mFacebookQueryThread.start();

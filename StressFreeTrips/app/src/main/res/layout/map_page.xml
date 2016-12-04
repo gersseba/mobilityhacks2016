@@ -37,7 +37,7 @@
                 android:background="@color/cast_expanded_controller_ad_container_white_stripe_color"
                 android:layout_gravity="center_vertical"/>
 
-            <EditText
+            <AutoCompleteTextView
                 android:text="Departure"
                 android:layout_width="256dp"
                 android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
                 android:background="@color/cast_expanded_controller_ad_container_white_stripe_color"
                 android:layout_gravity="center_vertical"/>
 
-            <EditText
+            <AutoCompleteTextView
                 android:text="Arrival"
                 android:layout_width="256dp"
                 android:layout_height="wrap_content"
