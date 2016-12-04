@@ -33,7 +33,6 @@ public class FacebookConnect  {
     public FacebookConnect () {
         FacebookSdk.sdkInitialize(SlideActivity.mainActivity);
         AppEventsLogger.activateApp(SlideActivity.mainActivity);
-//        AccessToken accessToken = AccessToken.getCurrentAccessToken();
         AccessToken accessToken = new AccessToken(
                 SlideActivity.mainActivity.getResources().getString(R.string.facebook_app_access_token),
                 SlideActivity.mainActivity.getResources().getString(R.string.facebook_app_id),
