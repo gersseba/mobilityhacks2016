@@ -21,6 +21,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -38,7 +40,7 @@ public class SlideActivity extends FragmentActivity {
 
     private final static int NOTIFICATION_ID = 123;
 
-    public static Activity mainActivity;
+    public static SlideActivity mainActivity;
 
     /**
      * The number of pages (wizard steps) to show in this demo.
@@ -67,6 +69,8 @@ public class SlideActivity extends FragmentActivity {
     protected int mState = 1; // 0 = normal, 1 = small congestion, 2 = large congestion
 
     protected boolean mShowNotification;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +110,7 @@ public class SlideActivity extends FragmentActivity {
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
 
+
         mainActivity = this;
     }
 
@@ -122,6 +127,10 @@ public class SlideActivity extends FragmentActivity {
         mToolbar.getMenu().getItem(1).setIcon(drawable);
     }
 
+    public void setState() {
+        Drawable drawable = getResources().getDrawable(R.drawable.ic_action_new_notification, null);
+        mToolbar.getMenu().getItem(1).setIcon(drawable);
+    }
 
     private void setState(int state) {
         this.mState = state < 3 ? state : 3;
