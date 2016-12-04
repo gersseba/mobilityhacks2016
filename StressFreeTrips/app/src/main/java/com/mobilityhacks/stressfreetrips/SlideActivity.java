@@ -8,8 +8,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.PopupWindowCompat;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,9 +15,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Toolbar;
-
-import com.google.android.gms.games.internal.PopupManager;
-import com.google.android.gms.maps.model.LatLng;
 
 /**
  * Created by Owner on 03.12.2016.
@@ -47,7 +42,7 @@ public class SlideActivity extends FragmentActivity {
 
     public static MapsFragment mMapFragment;
 
-    protected SlidePageFragement mSlidePageFragement;
+    protected RoutePage mRoutePage;
 
     protected Toolbar mToolbar;
 
@@ -101,15 +96,15 @@ public class SlideActivity extends FragmentActivity {
                     }
                     return mMapFragment;
                 case 1:
-                    if(mSlidePageFragement == null) {
-                        mSlidePageFragement = new SlidePageFragement();
+                    if(mRoutePage == null) {
+                        mRoutePage = new RoutePage();
                     }
-                    return mSlidePageFragement;
+                    return mRoutePage;
                 default:
-                    if(mSlidePageFragement == null) {
-                        mSlidePageFragement = new SlidePageFragement();
+                    if(mRoutePage == null) {
+                        mRoutePage = new RoutePage();
                     }
-                    return mSlidePageFragement;
+                    return mRoutePage;
             }
         }
 
@@ -139,6 +134,7 @@ public class SlideActivity extends FragmentActivity {
                 popupView,
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
+
         popupWindow.showAsDropDown(mToolbar);
         return true;
     }

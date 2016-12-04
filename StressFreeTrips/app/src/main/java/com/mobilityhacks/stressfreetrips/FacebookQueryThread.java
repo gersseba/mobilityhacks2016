@@ -5,9 +5,6 @@ import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-
 /**
  * Created by Owner on 03.12.2016.
  */
@@ -24,12 +21,13 @@ public class FacebookQueryThread extends Thread {
                 SlideActivity.mainActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+//                        SlideActivity.mMapFragment.clearCircles();
                         for (int i = 0; i < stops.length; i++) {
-                            SlideActivity.mMapFragment.addCircle(stops[i].latitude, stops[i].longitude, 200, Color.RED);
+                            SlideActivity.mMapFragment.addCircle(stops[i], 200, Color.RED);
                         }
                     }
                 });
-                Thread.sleep(10000);
+                Thread.sleep(2000);
             } catch (Exception e) {
                 Log.e("FacebookThread", e.getMessage());
             }

@@ -10,13 +10,13 @@ import android.view.ViewGroup;
  * Created by Owner on 03.12.2016.
  */
 
-public class SlidePageFragement extends Fragment {
+public class RoutePage extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
-                R.layout.slide_page, container, false);
+                R.layout.route_page, container, false);
 
 
         return rootView;

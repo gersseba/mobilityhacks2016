@@ -23,6 +23,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
 
 /**
  * Created by Owner on 03.12.2016.
@@ -30,17 +31,24 @@ import java.util.Iterator;
 
 public class MapsFragment extends Fragment {
 
+    protected final static double BERLIN_BR_LAT = 52.473901;
+    protected final static double BERLIN_BR_LNG = 13.504213;
+
     MapView mMapView;
     private GoogleMap googleMap;
-
-    private final static LatLng ALEX = new LatLng(52.521918, 13.413215);
-    private final static LatLng WOANDERS = new LatLng(52.5, 13.4);
-    private final static LatLng NOCHWOANDERS = new LatLng(52.6, 13.43);
 
     private ArrayList<Circle> circles = new ArrayList<>();
     private ArrayList<Polyline> lines = new ArrayList<>();
 
     private FacebookQueryThread mFacebookQueryThread = new FacebookQueryThread();
+
+    private Random mRandom = new Random();
+
+    {
+        mRandom.setSeed(200);
+    }
+
+    private final static int[] colors = new int[] {Color.YELLOW | 0x88000000, Color.RED | 0x88000000, Color.argb(88, 255, 128,0)};
 
 
     @Override
@@ -81,22 +89,32 @@ public class MapsFragment extends Fragment {
                 googleMap = mMap;
 
 
-                LatLng berlin = new LatLng(52.52, 13.41);
+                LatLng berlin = new LatLng(52.521918, 13.413215);
 
                 // For zooming automatically to the location of the marker
-                CameraPosition cameraPosition = new CameraPosition.Builder().target(berlin).zoom(10).build();
+                CameraPosition cameraPosition = new CameraPosition.Builder().target(berlin).zoom(11).build();
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+                for(int i = 0; i < 17; i ++) {
+                    addCircle(randomPoint(), mRandom.nextInt(250) + 250, colors[mRandom.nextInt(3)]);
+                }
             }
         });
+
+
         mFacebookQueryThread.start();
 
         return rootView;
     }
 
-    public void addCircle(double lat, double lng, int radius, int color) {
+    public LatLng randomPoint() {
+        return new LatLng(BERLIN_BR_LAT + mRandom.nextInt(10)/100.0, BERLIN_BR_LNG - mRandom.nextInt(25)/100.0);
+    }
+
+    public void addCircle(LatLng latLng, int radius, int color) {
         color |= 0xFF000000;
         color &= 0x88FFFFFF;
-        circles.add(googleMap.addCircle(new CircleOptions().center(new LatLng(lat, lng))
+        circles.add(googleMap.addCircle(new CircleOptions().center(latLng)
                 .radius(radius)
                 .strokeColor(Color.TRANSPARENT)
                 .fillColor(color)));
