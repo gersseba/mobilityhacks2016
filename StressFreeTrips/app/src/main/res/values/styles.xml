@@ -8,4 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="DialogTheme" >
+        <item name="colorAccent">#F0D722</item>
+    </style>
+
 </resources>
