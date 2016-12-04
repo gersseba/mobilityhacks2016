@@ -265,7 +265,7 @@
                             android:layout_height="match_parent"/>
 
                         <TextView
-                            android:text="@string/additionalBonusSmall"
+                            android:text="30"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:id="@+id/extra_bonus_points1"
@@ -360,7 +360,7 @@
                         android:weightSum="1">
 
                         <TextView
-                            android:text="Additional time needed:"
+                            android:text="Starts earlier:"
                             android:layout_width="160dp"
                             android:layout_height="wrap_content"
                             android:id="@+id/extraTimeDescription2"
@@ -369,7 +369,7 @@
                             android:layout_weight="0.98"/>
 
                         <TextView
-                            android:text="@string/additionalTimeSmall"
+                            android:text="15min"
                             android:layout_width="184dp"
                             android:layout_height="wrap_content"
                             android:id="@+id/extra_time"
@@ -496,7 +496,7 @@
                         android:weightSum="1">
 
                         <TextView
-                            android:text="Additional time needed:"
+                            android:text="Starts later:"
                             android:layout_width="160dp"
                             android:layout_height="wrap_content"
                             android:id="@+id/extraTimeDescription"
@@ -505,7 +505,7 @@
                             android:layout_weight="0.98"/>
 
                         <TextView
-                            android:text="@string/additionalTimeSmall"
+                            android:text="30min"
                             android:layout_width="184dp"
                             android:layout_height="wrap_content"
                             android:id="@+id/extra_time3"
