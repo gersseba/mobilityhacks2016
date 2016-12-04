@@ -96,7 +96,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
+       <!--<TextView
             android:text="Expected delay:"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -112,7 +112,7 @@
             android:gravity="right"
             android:textAlignment="gravity"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:layout_weight="1"/>
+            android:layout_weight="1"/> -->
     </LinearLayout>
 
     <View
@@ -140,6 +140,7 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/alternativeroutepitch"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:background="@drawable/border"
@@ -565,7 +566,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/accept"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:enabled="false" />
     </LinearLayout>
 
 </LinearLayout>
