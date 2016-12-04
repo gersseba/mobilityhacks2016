@@ -1,6 +1,7 @@
 package com.mobilityhacks.stressfreetrips;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -76,14 +77,24 @@ public class SlideActivity extends FragmentActivity {
         mToolbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(mState >= 2) {
+                    return;
+                }
                 LatLng[] latLngs = FacebookConnect.getEvents();
                 if(mRouteFragment == null) {
                     mRouteFragment = new RouteFragment();
                 }
-                for(LatLng latLng : latLngs) {
-                    mRouteFragment.setCircle(latLng, 500, Color.RED);
-                }
                 setState(mState + 1);
+                int color = 0;
+                if(mState == 1) {
+                    color = 0xF0FF8800;
+                } else if (mState == 2) {
+                    color = 0x88FF0000;
+                }
+                for(LatLng latLng : latLngs) {
+                    mRouteFragment.setCircle(latLng, 500, color);
+                    mMapFragment.setCircle(latLng, 500, color);
+                }
             }
         });
         setActionBar(mToolbar);
@@ -103,28 +114,14 @@ public class SlideActivity extends FragmentActivity {
         Drawable drawable;
         if(show) {
             drawable = getResources().getDrawable(R.drawable.ic_action_new_notification, null);
-            showNotification();
         } else {
             drawable = getResources().getDrawable(R.drawable.ic_action_no_notification, null);
             ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).cancel(NOTIFICATION_ID);
         }
         // todo show notification
-        mToolbar.getMenu().getItem(0).setIcon(drawable);
+        mToolbar.getMenu().getItem(1).setIcon(drawable);
     }
 
-    private void showNotification() {
-        Intent notificationIntent = new Intent(this, SlideActivity.class);
-        PendingIntent clickIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
-        Notification.Builder b = new Notification.Builder(this)
-                .setContentTitle("Route change")
-                .setContentText("Please check for alternatives")
-                .setSmallIcon(R.drawable.ic_action_new_notification)
-                .setContentIntent(clickIntent)
-                .setAutoCancel(false)
-                .setOngoing(true)
-                .setPriority(Notification.PRIORITY_MAX);
-
-    }
 
     private void setState(int state) {
         this.mState = state < 3 ? state : 3;
@@ -134,8 +131,24 @@ public class SlideActivity extends FragmentActivity {
                 drawable = getResources().getDrawable(R.drawable.ic_action_no_notification, null);
                 break;
             case 1:
+                drawable = getResources().getDrawable(R.drawable.ic_action_new_notification, null);
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+                builder.setMessage("New alert concerning upcoming trip")
+                        .setTitle("Alert");
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                break;
             case 2:
                 drawable = getResources().getDrawable(R.drawable.ic_action_new_notification, null);
+                builder = new AlertDialog.Builder(this);
+                builder.setMessage("New live alert concerning upcoming trip")
+                        .setTitle("Life Alert");
+                builder.setIcon(getResources().getDrawable(R.drawable.ic_action_f, null));
+
+                dialog = builder.create();
+                dialog.show();
                 break;
             case 3:
             default:
